@@ -11,38 +11,66 @@
 }
 
 .cart {
-    background-color: rgb(255, 115, 0);
+    background-color:#e0e0e0;;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-    padding: 5px 10px;
-    color: rgb(32, 78, 131);
-    height: 40px;
-    margin-top: 16px;
+    padding: 1 rem;
+    margin: 0.5 rem;
+    border-radius:0.5 rem;
+}
+
+.row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.cart:hover .remove {
-    display: block;
-}
-
+  }
 .remove {
-    display: none;
+    display: block;
+    float: right;
+    margin-top :50 px;
 }
 
 .item {
-    display: flex;
     align-items: center;
+    margin:30px;
+}
+.entry {
+    display: flex;
+    justify-content: space-between;
+  }
+.row.center {
+align-items: center;
 }
 
-
+.block1 {
+    background-color: #e0e0e0;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+  }
+  img.imgs {
+    max-height: 15rem;
+  }
 .price {
     display: flex;
     align-items: right;
 }
 
+button {
+    font-size: 0.8rem;
+    border: 0.1rem #404040 solid;
+    background-color: #f0c040;
+    width: 100%;
+    cursor: pointer;
+
+  }
+
+  button.add{
+    width: 1.5rem;
+    align-items: right;
+    margin:10px;
+    border-radius: 0.5 rem;
+
+}
 .icon {
+    margin-top:5px;
     margin-right: 10px;
 }
