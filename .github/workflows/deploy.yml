@@ -14,25 +14,25 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
         
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
-    - name: yarn Install
+    - name: Install
       run: |
-        yarn install
+        npm install
       working-directory: ${{ env.working-directory }}
     - name: Staging Build
       run: |
-        yarn build
+        npm build
       working-directory: ${{ env.working-directory }}
     - name: Unit Tests
       run: |
-        yarn test
+        npm test
       working-directory: ${{ env.working-directory }}
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
