@@ -30,10 +30,6 @@ jobs:
       run: |
         npm build
       working-directory: ${{ env.working-directory }}
-    - name: Unit Tests
-      run: |
-        npm test
-      working-directory: ${{ env.working-directory }}
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
