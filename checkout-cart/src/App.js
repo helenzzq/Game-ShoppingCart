@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
-import Item from './Component/Item'
+import GameList from './GameList'
+import Game from './Component/Game';
 
 const INIT_ITEMS = [
   {
@@ -37,42 +38,41 @@ function ItemForm({ addItem }) {
 }
 
 function App () {
-  const localItems = JSON.parse(localStorage.getItem('items'));
-  const [items, setItems] = useState(localItems || INIT_ITEMS);
+  // const localItems = JSON.parse(localStorage.getItem('items'));
+  // const [items, setItems] = useState(localItems || INIT_ITEMS);
 
-  useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(items));
-  }, [items])
+  // useEffect(() => {
+  //   localStorage.setItem('items', JSON.stringify(items));
+  // }, [items])
 
-  const addItem = text => {
-    const newItems = [{ text }, ...items];
-    setItems(newItems);
-  };
+  // const addItem = text => {
+  //   const newItems = [{ text }, ...items];
+  //   setItems(newItems);
+  // };
 
-  const removeItem = (e, index) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
-  };
+  // const removeItem = (e, index) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const newItems = [...items];
+  //   newItems.splice(index, 1);
+  //   setItems(newItems);
+  // };
+  const { products } = GameList;
+  const [cartItems, setCartItems] = useState([]);
 
   return (
-    <div className="app">
-      <div className="cart-list">
-        <ItemForm addItem={addItem} />
-        {
-          items.map((v, index) => (
-            <Item
-              key={v.text} 
-              item={v} 
-              index={index} 
-              removeItem={removeItem}
-            />
-          ))
-        }
+    <div className="App">
+      <div className="entry">
+      <div className="block1">
+      <h2>Products</h2>
+      <div className="entry">
+        {products.map((product) => (
+          <Game key={product.id} product={product}></Game>
+        ))}
       </div>
+        </div>
+        </div>
     </div>
-  )
+  );
 }
 export default App;
