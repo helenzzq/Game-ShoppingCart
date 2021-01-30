@@ -17,6 +17,30 @@ const INIT_ITEMS = [
 ]
 
 
+// componentDidMount() {
+//   // use react set state to add items to local cart
+//   this.setState({
+//     product: getDataBase()
+//   })
+// }
+
+// componentDidUpdate(props) {
+//   const 
+//   // submit update to database
+    // updateDataBase();
+// }
+
+function updateDataBase(item) {
+
+}
+
+function getDataBase() {
+
+  // Array of items
+  return [];
+}
+
+
 function ItemForm({ addItem }) {
   const [value, setValue] = useState('');
   const handleSubmit = (e) => {
@@ -25,6 +49,7 @@ function ItemForm({ addItem }) {
     addItem(value);
     setValue('');
   }
+  
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -36,6 +61,8 @@ function ItemForm({ addItem }) {
     </form>
   )
 }
+
+
 
 function App () {
   // const localItems = JSON.parse(localStorage.getItem('items'));
