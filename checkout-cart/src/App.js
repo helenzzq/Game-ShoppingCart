@@ -3,7 +3,7 @@ import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
 import Game from './Component/Game';
-
+import Summary from './Component/Summary'
 const INIT_ITEMS = [
   {
     text: 'Apple'
@@ -64,13 +64,14 @@ function App () {
     <div className="App">
       <div className="entry">
       <div className="block1">
-      <h2>Products</h2>
+      <h1>Games</h1>
       <div className="entry">
         {products.map((product) => (
           <Game key={product.id} product={product}></Game>
         ))}
       </div>
         </div>
+        <Summary></Summary>
         </div>
     </div>
   );

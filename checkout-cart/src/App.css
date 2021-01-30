@@ -5,7 +5,10 @@
     display: flex;
     justify-content: right;
 }
-
+h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 .cart-list {
     width: 600px;
 }
@@ -39,20 +42,28 @@
 .row.center {
 align-items: center;
 }
-
-.block1 {
-    background-color: #e0e0e0;
-    padding: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-  }
-  img.imgs {
+img.imgs {
     max-height: 15rem;
   }
 .price {
     display: flex;
     align-items: right;
 }
+
+.block1 {
+    background-color: #e0e0e0;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+
+  }
+  .summaryblock {
+    background-color: #e0e0e0;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    flex:1;
+  }
 
 button {
     font-size: 0.8rem;
