@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
 import Game from './Component/Game';
-
-const INIT_ITEMS = [
-  {
-    text: 'Apple'
-  },
-  {
-    text: 'Banana'
-  },
-  {
-    text: 'Carrot'
-  }
-]
-
 
 // componentDidMount() {
 //   // use react set state to add items to local cart
@@ -30,39 +17,15 @@ const INIT_ITEMS = [
     // updateDataBase();
 // }
 
-function updateDataBase(item) {
+// function updateDataBase(item) {
 
-}
+// }
 
-function getDataBase() {
+// function getDataBase() {
 
-  // Array of items
-  return [];
-}
-
-
-function ItemForm({ addItem }) {
-  const [value, setValue] = useState('');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!value) return;
-    addItem(value);
-    setValue('');
-  }
-  
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={value}
-        className="input"
-        onChange={(e) => {setValue(e.target.value)}}
-      />
-        
-    </form>
-  )
-}
-
-
+//   // Array of items
+//   return [];
+// }
 
 function App () {
   // const localItems = JSON.parse(localStorage.getItem('items'));
@@ -85,7 +48,6 @@ function App () {
   //   setItems(newItems);
   // };
   const { products } = GameList;
-  const [cartItems, setCartItems] = useState([]);
 
   return (
     <div className="App">
