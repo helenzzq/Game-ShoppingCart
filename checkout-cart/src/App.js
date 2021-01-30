@@ -57,7 +57,7 @@ function App () {
   //   newItems.splice(index, 1);
   //   setItems(newItems);
   // };
-  const { products } = GameList;
+  const { products: games } = GameList;
   const [cartItems, setCartItems] = useState([]);
 
   return (
@@ -66,8 +66,8 @@ function App () {
       <div className="block1">
       <h1>Games</h1>
       <div className="entry">
-        {products.map((product) => (
-          <Game key={product.id} product={product}></Game>
+        {games.map((gameItem) => (
+          <Game key={gameItem.id} product={gameItem}></Game>
         ))}
       </div>
         </div>
