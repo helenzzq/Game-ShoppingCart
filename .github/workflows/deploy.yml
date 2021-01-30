@@ -1,55 +1,40 @@
-name: S3 Deploy
+name: S3 Deployment
 on:
   pull_request:
-    branches: [ main ]
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+      - main
   workflow_dispatch:
+
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: 'AKIAYQ5HZXTK47HUW2UF'
-      AWS_SECRET_ACCESS_KEY: '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'
+    
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        
     steps:
-        - uses: actions/checkout@v2
-        
-        - name: Install dependencies
-          run: yarn
-        
-        - name: Build
-          run: yarn build
-          
-        - name: Deploy
-          uses: reggionick/s3-deploy@v3
-          with:
-            folder: build
-            bucket: 'csc301a1'
-            bucket-region: 'ca-central-1'
-#             dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-#             invalidation: /
-#             delete-removed: true
-#             no-cache: true
-#             private: true
-
-# name: Deploy Website to S3
-
-# on:
-#   pull_request:
-#     branches: [ main ]
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: jakejarvis/s3-sync-action@master
-#       with:
-#         args: --acl --follow-symlinks --delete
-#       env:
-#         AWS_S3_BUCKET: 'csc301a1'
-#         AWS_ACCESS_KEY_ID: 
-#         AWS_SECRET_ACCESS_KEY: 
-#         AWS_REGION: 'ca-central-1'
-#         SOURCE_DIR: 'public'      # optional: defaults to entire repository
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: yarn Install
+      run: |
+        yarn install
+    - name: Staging Build
+      run: |
+        yarn build
+    - name: Unit Tests
+      run: |
+        yarn test
+    - name: Deploy to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --delete
+      env:
+        AWS_S3_BUCKET: 'csc301a1'
+        AWS_ACCESS_KEY_ID: 'AKIAYQ5HZXTK47HUW2UF'
+        AWS_SECRET_ACCESS_KEY: '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'
+        AWS_REGION: 'ca-central-1'
+        SOURCE_DIR: "build"
