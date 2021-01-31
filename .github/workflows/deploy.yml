@@ -21,32 +21,32 @@ jobs:
       
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@master
-      with:
+      with: |
         node-version: ${{ matrix.node-version }}
     
     - name: change directory
-      run:
+      run: |
         cd checkout-cart
         
     - name: Install Dependencies
-      run:
+      run: |
         npm install
 #       working-directory: ${{ env.working-directory }}
     
     - name: Staging Build
-      run:
+      run: |
         npm build
 #       working-directory: ${{ env.working-directory }}
     
     - name: Get awscliv2.zip
-      run:
+      run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
     - name: Decompress
       uses: TonyBogdanov/zip@1.0
-      with:
+      with: |
           args: unzip -qq awscliv2.zip -d ./aws
     
     - name: Install aws-cli
-      run:
+      run: |
         ./aws/install
