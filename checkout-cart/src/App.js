@@ -6,7 +6,6 @@ import Game from './Component/Game';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
-import addItem from './Component/Summary'
 
 // class fetch extends Component{
 //     componentDidMount(){
@@ -32,12 +31,21 @@ import addItem from './Component/Summary'
 
 // }
 
-
 function App() {
-  // Current available Game items
   const { games } = GameList;
   const [item, updateCart] = useState([]);
 
+  const addItem = (gameItem) => {
+    const itemInCart = item.find(k => k.id === gameItem.id);
+    if (itemInCart) {
+      updateCart(item.map(x => x.id === gameItem.id ? {
+        ...itemInCart, num: itemInCart.num + 1
+      } : x));
+    }
+    else {
+      updateCart([...item, { ...gameItem, num: 1 }])
+    }
+  }
 
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
