@@ -21,7 +21,7 @@ jobs:
       
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@master
-      with: |
+      with:
         node-version: ${{ matrix.node-version }}
     
     - name: change directory
@@ -44,7 +44,7 @@ jobs:
 
     - name: Decompress
       uses: TonyBogdanov/zip@1.0
-      with: |
+      with:
           args: unzip -qq awscliv2.zip -d ./aws
     
     - name: Install aws-cli
