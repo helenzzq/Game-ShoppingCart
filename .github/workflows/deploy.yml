@@ -22,7 +22,7 @@ jobs:
       uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install
+    - name: Install Dependencies
       run: |
         npm install
       working-directory: ${{ env.working-directory }}
@@ -31,12 +31,14 @@ jobs:
         npm build
       working-directory: ${{ env.working-directory }}
     - name: Deploy to S3
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --delete
+      run:
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+        npm deploy
+      working-directory: ${{ env.working-directory }}
       env:
         AWS_S3_BUCKET: 'csc301a1'
         AWS_ACCESS_KEY_ID: 'AKIAYQ5HZXTK47HUW2UF'
         AWS_SECRET_ACCESS_KEY: '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'
         AWS_REGION: 'ca-central-1'
-#         SOURCE_DIR: 'public'
