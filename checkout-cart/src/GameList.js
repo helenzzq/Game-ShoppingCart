@@ -1,5 +1,5 @@
-const data = {
-    products: [
+const gameList = {
+    games: [
       {
         id: '1',
         name: "Assassin's creed valhalla",
@@ -20,5 +20,5 @@ const data = {
       },
     ],
   };
-  export default data;
+  export default gameList;
   
