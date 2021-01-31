@@ -22,6 +22,31 @@ function App() {
   }
 
 
+
+// componentDidMount() {
+//   // use react set state to add items to local cart
+//   this.setState({
+//     product: getDataBase()
+//   })
+// }
+
+// componentDidUpdate(props) {
+//   const 
+//   // submit update to database
+    // updateDataBase();
+// }
+
+// function updateDataBase(item) {
+
+// }
+
+// function getDataBase() {
+
+//   // Array of items
+//   return [];
+// }
+
+
   return (
     <div className="App">
       <div className="item">
