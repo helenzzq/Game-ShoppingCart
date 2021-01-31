@@ -13,19 +13,7 @@ export default function Summary(props) {
             </div>
         );
     }
-    const addItem = (gameItem) => {
-      const itemInCart = item.find(k => k.id === gameItem.id);
-      if (itemInCart) {
-        updateCart(item.map(x => x.id === gameItem.id ? {
-          ...itemInCart, num: itemInCart.num + 1
-        } : x));
-        // componentDidUpdate(gameItem.id, num);
-      }
-      else {
-        updateCart([...item, { ...gameItem, num: 1 }])
-        // componentDidUpdate(gameItem.id, num);
-      }
-    }
+    
     const deleteItem = (gameItem) => {
         const itemInCart = item.find((x) => x.id === gameItem.id);
         if (itemInCart.num === 1) {
@@ -35,6 +23,7 @@ export default function Summary(props) {
           updateCart(
             item.map((x) =>
               x.id === gameItem.id ? { ...itemInCart, num: itemInCart.num - 1 } : x
+                    //componentDidUpdate(gameItem.id,itemInCart)
             )
           );
           // componentDidUpdate(gameItem.id, itemInCart.num);
@@ -43,7 +32,7 @@ export default function Summary(props) {
     
     const removeAll = (gameItem) => {
       updateCart(item.filter((x) => x.id !== gameItem.id));
-      // updateDataBase(gameItem.id, 0);
+      //componentDidUpdate(gameItem.id,0)
       }
     function DisplaySummary() {
 
