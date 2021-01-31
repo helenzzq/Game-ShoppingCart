@@ -7,7 +7,17 @@ export default function Summary(props) {
     const tax = subtotal * 0.13;
     const shipping = 0;
     const total = subtotal + tax + shipping;
-    
+
+    function PriceTag(props) {
+        const { tag, tagName } = props;
+        return (
+            <div className="row">
+                <div className="col-2">{tag}</div>
+                <div className="col-1 text-right">${tagName.toFixed(2)}</div>
+            </div>
+        );
+    }
+
     return (
         <aside className="block col-1">
             <h1 className="title">Check-Out Summary</h1>
@@ -35,7 +45,21 @@ export default function Summary(props) {
 
                     );
                 })}
-            
+               {itemInCart.length !== 0 && (
+                    <>
+                    <hr></hr>
+                    <PriceTag tag="Subtotal" tagName={subtotal} ></PriceTag>
+                    <PriceTag tag="Tax" tagName={tax} ></PriceTag>
+                    <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
+                    <PriceTag tag="Total" tagName={total} ></PriceTag>
+            <hr />
+            <div className="row">
+              <button onClick={() => alert('Implement Checkout!')}>
+                Checkout
+              </button>
+            </div>
+          </>
+        )}
             
         </aside>
   );
