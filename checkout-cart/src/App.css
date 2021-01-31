@@ -18,6 +18,7 @@ a {
   text-decoration: none;
 }
 .container{
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,7 +51,6 @@ li {
   font-family: comic sans MS;
   font-size: 18px;
   color: white;
-
 }
 a
 {
@@ -61,13 +61,12 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: inter;
-  min-height: 7vh;
+  min-height: 6vh;
 }
 .navBar{
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 40%;
 
 }
 .games{
@@ -108,7 +107,7 @@ button {
   color:white;
  }
 button.add {
-  margin-left:20px;
+  margin-left:80px;
   background-color: #e45c02;
   width: 1.5rem;
 }
@@ -118,4 +117,7 @@ button.add {
 }
 .removeAll {
     margin-left:10px;
+}
+.total{
+  font-weight: bold;
 }

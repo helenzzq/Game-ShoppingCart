@@ -13,6 +13,7 @@ export default function Banner(props) {
                     <li>Home</li>
                     <li>SignUp</li>
                     <li>ShoppingCart</li>
+                    <li>Contact Us</li>
                 </ul>
             </nav>
 

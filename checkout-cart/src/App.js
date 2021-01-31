@@ -53,14 +53,14 @@ function App() {
       <div><Banner></Banner></div>
       <div className="container">
         <div className="games">
-          <h1 className="title">Games</h1>
+          <h1 className="title">Hottest Sale</h1>
           <div className="item">
             {games.map((gameItem) => (
               <Game key={gameItem.id} gameItem={gameItem} addItem={addItem}></Game>
             ))}
           </div>
         </div>
-        <Summary updateCart={updateCart} addItem={addItem} item={item}></Summary>
+        <Summary updateCart={updateCart} item={item}></Summary>
       </div>
     </div>
   );
