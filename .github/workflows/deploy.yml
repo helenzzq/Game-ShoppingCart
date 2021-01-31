@@ -28,8 +28,9 @@ jobs:
     - name: Decompress
       uses: TonyBogdanov/zip@1.0
       with:
-          args: unzip -qq "./awscliv2.zip" -d "./aws"
+          args: unzip -qq "./checkout-cart/awscliv2.zip" -d "./checkout-cart/aws"
     
     - name: Install aws-cli
       run: |
+        cd checkout-cart &&
         ./aws/install
