@@ -6,59 +6,38 @@
     justify-content: right;
 }
 
-h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-.cart-list {
-    width: 600px;
+.title{
+  font-weight: bold;
+  font-size:  small;
 }
-
-.cart {
-    background-color:#e0e0e0;;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-    padding: 1 rem;
-    margin: 0.5 rem;
-    border-radius:0.5 rem;
+a {
+  text-decoration: none;
 }
-
-.remove {
-    display: block;
-    float: right;
-    margin-top :50 px;
+.row {
+  display: flex;
+  justify-content: space-between;
 }
-
-.item {
-    align-items: center;
-    margin:30px;
+.row.center {
+  align-items: center;
 }
-.entry {
-    display: flex;
-    justify-content: space-between;
-  }
-img.imgs {
-    max-height: 15rem;
-  }
-.price {
-    display: flex;
-    align-items: right;
+.col-1 {
+  flex: 1;
 }
-
-.block1 {
-    background-color: #e0e0e0;
-    padding: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-
-  }
-  .summaryblock {
-    background-color: #e0e0e0;
-    padding: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    flex:1;
-  }
-
+.col-2 {
+  flex: 2;
+}
+.block {
+  background-color: #e0e0e0;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+}
+.text-right {
+  text-align: right;
+}
+img.itemImg {
+  max-height: 15rem;
+}
 button {
   font-size: 0.8rem;
   padding: 0.2rem;
@@ -68,24 +47,16 @@ button {
   background-color: #f0c040;
   width: 100%;
   cursor: pointer;
-
-  }
-
-  button.add{
-    width: 1.5rem;
-    align-items: right;
-    margin:10px;
-    border-radius: 0.5 rem;
-
 }
-button.delete {
+button.add {
+  margin-left: 70px;
+  background-color: #40c0f0;
   width: 1.5rem;
-  align-items: right;
-  margin:10px;
-  border-radius: 0.5 rem;
-
 }
-.icon {
-    margin-top:5px;
-    margin-right: 10px;
+.removeSingleItem{
+  background-color: #f04040;
+  width: 1.5rem;
+}
+.removeAll {
+    margin-left:10px;
 }

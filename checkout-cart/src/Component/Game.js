@@ -7,11 +7,12 @@ export default function Game(game) {
   
   return (
     <div className ="item">
-      <img className="imgs" src={gameItem.image} alt={gameItem.name} />
+      <img className="itemImg" src={gameItem.image} alt={gameItem.name} />
       <h3>{gameItem.name}</h3>
       <div>${gameItem.price}</div>
       <div>
-        <button onClick={()=> addItem(gameItem)} >Add To Cart</button>
+        <button onClick={() => addItem(gameItem)} >Add To Cart</button>
+      
       </div>
     </div>
   );
