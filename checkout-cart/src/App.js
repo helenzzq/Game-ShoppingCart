@@ -8,32 +8,32 @@ import Summary from './Component/Summary'
 function App () {
 
   const { products: games } = GameList;
-  const [itemInCart, setCartItems] = useState([]);
+  const [item, setCartItems] = useState([]);
   const deleteItem = (product) => {
-    const exist = itemInCart.find((x) => x.id === product.id);
+    const exist = item.find((x) => x.id === product.id);
     if (exist.qty === 1) {
       removeAll(product)
     } else {
       setCartItems(
-        itemInCart.map((x) =>
+        item.map((x) =>
           x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
         )
       );
     }
   };
   const removeAll = (product) => {
-    setCartItems(itemInCart.filter((x) => x.id !== product.id));
+    setCartItems(item.filter((x) => x.id !== product.id));
   }
 
   const addItem = (product) => {
-    const exist = itemInCart.find(x => x.id === product.id);
+    const exist = item.find(x => x.id === product.id);
     if (exist) {
-      setCartItems(itemInCart.map(x => x.id === product.id ? {
+      setCartItems(item.map(x => x.id === product.id ? {
         ...exist, qty: exist.qty + 1
       } : x));
     }
     else {
-      setCartItems([...itemInCart,{...product,qty:1}])
+      setCartItems([...item,{...product,qty:1}])
     }
   }
 
@@ -49,7 +49,7 @@ function App () {
         ))}
       </div>
         </div>
-        <Summary deleteItem={deleteItem} removeAll={removeAll} addItem={addItem} ItemInCart = {itemInCart}></Summary>
+        <Summary deleteItem={deleteItem} removeAll={removeAll} addItem={addItem} item = {item}></Summary>
         </div>
     </div>
   );

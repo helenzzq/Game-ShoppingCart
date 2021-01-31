@@ -12,7 +12,6 @@ export default function Game(game) {
       <div>${gameItem.price}</div>
       <div>
         <button onClick={() => addItem(gameItem)} >Add To Cart</button>
-      
       </div>
     </div>
   );
