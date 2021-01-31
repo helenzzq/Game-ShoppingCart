@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
 import Game from './Component/Game';
+import Summary from './Component/Summary'
+
+function App() {
+  const { products: games } = GameList;
+  const [item, updateCart] = useState([]);
+
+  const addItem = (gameItem) => {
+    const itemInCart = item.find(k => k.id === gameItem.id);
+    if (itemInCart) {
+      updateCart(item.map(x => x.id === gameItem.id ? {
+        ...itemInCart, num: itemInCart.num + 1
+      } : x));
+    }
+    else {
+      updateCart([...item, { ...gameItem, num: 1 }])
+    }
+  }
+
+
 
 // componentDidMount() {
 //   // use react set state to add items to local cart
@@ -27,40 +46,20 @@ import Game from './Component/Game';
 //   return [];
 // }
 
-function App () {
-  // const localItems = JSON.parse(localStorage.getItem('items'));
-  // const [items, setItems] = useState(localItems || INIT_ITEMS);
-
-  // useEffect(() => {
-  //   localStorage.setItem('items', JSON.stringify(items));
-  // }, [items])
-
-  // const addItem = text => {
-  //   const newItems = [{ text }, ...items];
-  //   setItems(newItems);
-  // };
-
-  // const removeItem = (e, index) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const newItems = [...items];
-  //   newItems.splice(index, 1);
-  //   setItems(newItems);
-  // };
-  const { products } = GameList;
 
   return (
     <div className="App">
-      <div className="entry">
-      <div className="block1">
-      <h2>Products</h2>
-      <div className="entry">
-        {products.map((product) => (
-          <Game key={product.id} product={product}></Game>
-        ))}
+      <div className="item">
+        <div className="block col-2">
+          <h1 className="title">Games</h1>
+          <div className="item">
+            {games.map((gameItem) => (
+              <Game key={gameItem.id} gameItem={gameItem} addItem={addItem}></Game>
+            ))}
+          </div>
+        </div>
+        <Summary updateCart={updateCart} addItem={addItem} item={item}></Summary>
       </div>
-        </div>
-        </div>
     </div>
   );
 }
