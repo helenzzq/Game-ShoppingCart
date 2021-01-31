@@ -20,9 +20,9 @@ jobs:
       
     - name: Install and Build
       run:
-        cd checkout-cart
-        npm install
-        npm build
+        cd checkout-cart &&
+        npm install &&
+        npm build &&
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
     - name: Decompress
