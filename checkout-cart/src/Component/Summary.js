@@ -21,13 +21,15 @@ export default function Summary(props) {
           updateCart(
             item.map((x) =>
               x.id === gameItem.id ? { ...itemInCart, num: itemInCart.num - 1 } : x
+                    //componentDidUpdate(gameItem.id,itemInCart)
             )
           );
         }
     };
     
     const removeAll = (gameItem) => {
-        updateCart(item.filter((x) => x.id !== gameItem.id));
+      updateCart(item.filter((x) => x.id !== gameItem.id));
+      //componentDidUpdate(gameItem.id,0)
       }
     function DisplaySummary() {
 
