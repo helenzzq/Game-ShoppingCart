@@ -6,47 +6,37 @@ import Game from './Component/Game';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
+import addItem from './Component/Summary'
+
+// class fetch extends Component{
+//     componentDidMount(){
+//     fetch(API + DEFAULT_QUERY)
+//       .then(response => response.json())
+//       .then();
+//   }
+//   componentDidUpdate(props) {
+//     //Pass in the quantity of this item in the cart and the item id
+//       const {id , num} = props;
+//     // submit update to database
+//       updateDataBase();
+//   }
+//     updateDataBase(props) {
+
+//   }
+
+//   function getDataBase() {
+
+//     // Array of items
+//     return [];
+//   }
+
+// }
+
 
 function App() {
+  // Current available Game items
   const { games } = GameList;
   const [item, updateCart] = useState([]);
-
-  const addItem = (gameItem) => {
-    const itemInCart = item.find(k => k.id === gameItem.id);
-    if (itemInCart) {
-      updateCart(item.map(x => x.id === gameItem.id ? {
-        ...itemInCart, num: itemInCart.num + 1
-      } : x));
-    }
-    else {
-      updateCart([...item, { ...gameItem, num: 1 }])
-    }
-  }
-
-
-
-// componentDidMount() {
-//   // use react set state to add items to local cart
-//   this.setState({
-//     product: getDataBase()
-//   })
-// }
-
-// componentDidUpdate(props) {
-//   const 
-//   // submit update to database
-    // updateDataBase();
-// }
-
-// function updateDataBase(item) {
-
-// }
-
-// function getDataBase() {
-
-//   // Array of items
-//   return [];
-// }
 
 
   return (
@@ -62,7 +52,7 @@ function App() {
             ))}
           </div>
         </div>
-        <Summary updateCart={updateCart} addItem={addItem} item={item}></Summary>
+        <Summary updateCart={updateCart} item={item}></Summary>
       </div>
     </div>
   );
