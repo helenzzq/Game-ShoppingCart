@@ -6,7 +6,7 @@ import Game from './Component/Game';
 import Summary from './Component/Summary'
 
 function App() {
-  const { products: games } = GameList;
+  const { games } = GameList;
   const [item, updateCart] = useState([]);
 
   const addItem = (gameItem) => {
