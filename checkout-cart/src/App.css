@@ -46,6 +46,10 @@ a {
 }
 li {
   list-style-type: none;
+  font-weight: bold;
+  font-family: comic sans MS;
+  font-size: 18px;
+  color: white;
 
 }
 a

@@ -7,6 +7,30 @@ import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
 
+// class fetch extends Component{
+//     componentDidMount(){
+//     fetch(API + DEFAULT_QUERY)
+//       .then(response => response.json())
+//       .then();
+//   }
+//   componentDidUpdate(props) {
+//     //Pass in the quantity of this item in the cart and the item id
+//       const {id , num} = props;
+//     // submit update to database
+//       updateDataBase();
+//   }
+//     updateDataBase(props) {
+
+//   }
+
+//   function getDataBase() {
+
+//     // Array of items
+//     return [];
+//   }
+
+// }
+
 function App() {
   const { games } = GameList;
   const [item, updateCart] = useState([]);
@@ -22,32 +46,6 @@ function App() {
       updateCart([...item, { ...gameItem, num: 1 }])
     }
   }
-
-
-
-// componentDidMount() {
-//   // use react set state to add items to local cart
-//   this.setState({
-//     product: getDataBase()
-//   })
-// }
-
-// componentDidUpdate(props) {
-//   const 
-//   // submit update to database
-    // updateDataBase();
-// }
-
-// function updateDataBase(item) {
-
-// }
-
-// function getDataBase() {
-
-//   // Array of items
-//   return [];
-// }
-
 
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>

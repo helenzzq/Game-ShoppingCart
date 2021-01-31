@@ -12,6 +12,7 @@ export default function Summary(props) {
             </div>
         );
     }
+    
     const deleteItem = (gameItem) => {
         const itemInCart = item.find((x) => x.id === gameItem.id);
         if (itemInCart.num === 1) {
@@ -59,7 +60,7 @@ export default function Summary(props) {
             <h1 className="title">Check-Out Summary</h1>
             <div>
                 {item.length === 0 &&
-                    <img alt="Empty cart" src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
+                    <img alt="Empty cart" style={{marginLeft : "67px"}} src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
                 </div>
                 {item.map((item)=>{
                     return (
