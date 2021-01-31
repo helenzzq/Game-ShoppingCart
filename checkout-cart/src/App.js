@@ -4,6 +4,8 @@ import 'bulma/css/bulma.css';
 import GameList from './GameList'
 import Game from './Component/Game';
 import Summary from './Component/Summary'
+import Banner from './Component/Banner'
+import background from './photo/background.jpg'
 
 function App() {
   const { games } = GameList;
@@ -48,9 +50,11 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div className="item">
-        <div className="block col-2">
+    <div className="App" style={{ backgroundImage: `url(${background})`, }}>
+
+      <div><Banner></Banner></div>
+      <div className="container">
+        <div className="games">
           <h1 className="title">Games</h1>
           <div className="item">
             {games.map((gameItem) => (

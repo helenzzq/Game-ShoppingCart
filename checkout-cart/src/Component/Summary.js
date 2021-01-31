@@ -6,8 +6,8 @@ export default function Summary(props) {
     function PriceTag(props) {
         const { tag, tagName } = props;
         return (
-            <div className="row">
-                <div className="col-2">{tag}</div>
+            <div className="entry">
+                <div style={{flex: 2}}>{tag}</div>
                 <div className="col-1 text-right">${tagName.toFixed(2)}</div>
             </div>
         );
@@ -43,7 +43,7 @@ export default function Summary(props) {
                 <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
                 <PriceTag tag="Total" tagName={total} ></PriceTag>
         <hr />
-        <div className="row">
+        <div className="entry">
           <button className="hoverBtn" onClick={() => alert('Jump To CheckOut Page !')}>
             Checkout
           </button>
@@ -63,16 +63,16 @@ export default function Summary(props) {
                 </div>
                 {item.map((item)=>{
                     return (
-                        <div key={item.id} className="row">
-                            <div className="col-2">
+                        <div key={item.id} className="entry">
+                            <div  style={{flex: 2}}>
                                 {item.name}
                             </div>
-                            <div className="col-2">
+                            <div  style={{flex: 2}}>
                                 <button onClick={() => addItem(item)} className="add">+</button>
                                 {'    '}
                                 <button onClick={() => deleteItem(item)} className="removeSingleItem"> - </button>
                             </div>
-                            <div className="col-2 text-right">
+                            <div  style={{flex: 2}}>
                                 {item.num} x ${item.price.toFixed(2)}
                             </div>
                             <a className="removeAll" href="#!" onClick={() => removeAll(item)}>{removeIcon}</a>
