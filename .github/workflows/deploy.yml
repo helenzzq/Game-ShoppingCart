@@ -27,7 +27,7 @@ jobs:
 
     - name: Decompress
       uses: TonyBogdanov/zip@1.0
-      with: |
+      with:
           args: unzip -qq awscliv2.zip -d ./aws
     
     - name: Install aws-cli
