@@ -28,5 +28,6 @@ jobs:
     - name: Install aws-cli
       run: |
         cd checkout-cart &&
+        echo $PWD &&
         aws s3 sync ./build/ s3://csc301a1 --acl public-read
 
