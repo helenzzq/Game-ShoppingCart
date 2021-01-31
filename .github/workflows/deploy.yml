@@ -30,13 +30,11 @@ jobs:
       run: |
         npm build
       working-directory: ${{ env.working-directory }}
-    - name: Deploy to S3
-      run:
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
-        npm deploy
-      working-directory: ${{ env.working-directory }}
+    - name: I
+      uses: chrislennon/action-aws-cli@v1.1
+    - name: Deployment
+      # All commands after this point have access to the AWS CLI
+      run: npm deploy
       env:
         AWS_S3_BUCKET: 'csc301a1'
         AWS_ACCESS_KEY_ID: 'AKIAYQ5HZXTK47HUW2UF'
