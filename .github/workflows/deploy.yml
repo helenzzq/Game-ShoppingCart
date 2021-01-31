@@ -33,4 +33,5 @@ jobs:
     - name: Install aws-cli
       run: |
         cd checkout-cart &&
-        sudo ./aws/install
+        chmod +x ./aws/install &&
+        ./aws/install
