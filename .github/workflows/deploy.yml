@@ -23,12 +23,12 @@ jobs:
         cd checkout-cart &&
         npm install &&
         npm build &&
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "./awscliv2.zip"
 
     - name: Decompress
       uses: TonyBogdanov/zip@1.0
       with:
-          args: unzip -qq awscliv2.zip -d ./aws
+          args: unzip -qq "./awscliv2.zip" -d "./aws"
     
     - name: Install aws-cli
       run: |
