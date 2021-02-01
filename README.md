@@ -29,7 +29,7 @@ For front end, we choose to use React.js. React is more managable and allowing r
 - **Popularity: Widespread Usage**
   - Accoding to Stackoverflow 2020,React.js is the second most popular web framework among all, as more then 35% of respondents use React.js.
   - Compared to React.js, other famous frameworks such as Angular.js, Vue.js,Spring has less users.
-      [![](./images/react_rank2.png)]!
+   ![Ranking of Top Web Framework](./images/react_rank2.PNG)
 
     | Web Framework | Popularity (collected from Stackoverflow 2020 suryvey) |
     | ------------- | ------------------------------------------------------ |
@@ -93,7 +93,7 @@ We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions,
 ##### Pros & Cons
   - **Pros: Clearer Structure and intuitive scripts**
     - Compared to Jenkins, Github Actions uses Yaml to create workflows and configuaration files, which has clearer structure .especially when building with mulitple operating system. Jenkins uses declarative pipelien and scripted pipelines.
-   [![](images/github_actions.png)]
+   ![Comparison between Jenkins and github actons](/images/github_actions.PNG)
 - **Pros:Cloud hosting in Github Actions**
   - Github Actions hosts its own runner in the cloud for us to use to run jobs, while Jenkins deployment are mostly self-hosted. As user, we need to maintain the server in our own data centers, which is much more inconvenient than github actions
 - **Cons: Bad at handling Ad hoc workflows**
