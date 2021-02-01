@@ -12,16 +12,51 @@ Here's the breakdown of the stacks that we've used in this assignment.
 - CI/CD: Github Actions
 
 ## Platform : Web
-In this assignment, we choose to develop a web application for the simple checkout cart,
-because the following features that web app possess;
+In this assignment, we choose to develop a web application for the simple checkout cart,because the following features that web possess;
 
-Firstly, Cross-platform is easier to implement in web application while for mobile app, 
-we need to consider the environment under both Android and iOS.
-Besides, web application is more scalable and more accessible, 
-which do not require installation and further save storage.
+- Firstly,web application is cross-platform. Developing sole mobile application will makes us restricted to the OS environment.
+- Besides, since we are using react.js for front-end development, we can reuse most of JS code between Android and iOS with React-like components. We can first use React to build the web framework and proceed to mobile development further.
+
+- In addition,web application is more scalable and more accessible, which do not require installation and further save storage.
+
+## Frontend
+For front end, we choose to use React.js. React is more managable and allowing resuing component. It focus on Business logic not on preventing your app from exploding.
+
+#### Comparison with other techonology
+
+- **Popularity: Widespread Usage**
+  - Accoding to Stackoverflow 2020,React.js is the second most popular web framework among all, as more then 35% of respondents use React.js.
+  - Compared to React.js, other famous frameworks such as Angular.js, Vue.js,Spring has less users.
+   ![Ranking of Top Web Framework](./images/react_rank2.png)
+
+    | Web Framework | Popularity (collected from Stackoverflow 2020 suryvey) |
+    | ------------- | ------------------------------------------------------ |
+    | React.js      | 35.9%                                                  |
+    | Angular       | 25.1%                                                  |
+    | Vue.js        | 17.3%                                                  |
+    | Spring.js     | 16.4%                                                  |
 
 
+##### Regular Javascript vs React 
+- **React is more managable**
+  - UI State becomes difficult to handle with Vanilla Javascript. In bigger Js applications, we have to manually target elements in the DOM. When building an app that is highly dynamic, React is more manageable.
 
+##### Vue vs React
+-  **Maturity: React has broader package ecosystem**
+  - Vue has fewer resources, available packages and third-party libraries. 
+  - Both Vue and React gain support from all major IDEs, while React is more extensive.
+  - React features a huge ecosystem and an extremely active community, which is convenient. That is to say, it contains a huge amount of libraries, packages,tools. That is to say, we may easy find a solution or an extra package to fix the problem we encounter.
+- **Scalability: Reusing Component in React**
+  - React is more scalable since it uses JSX which allows reusing component in the code. Thus the code structure is neat and clean. Both HTML and CSS are expressed via JavaScript with XML syntax.
+  - Vue uses HTML templating with single file component.When we are develope large project, reusing HTML templates is a huge pain and is nasty.
 
+##### Angular vs React
+- **Ease of Development : React**
+  React is more easy to learn and angular are new to us.
+  - With basic knowledge, the framework of React is much simple to understand. React is minimalistic, which do not have complicated features and dependency injection.
+  - Angular possess a huge library and is constantly updated, which requires extra learning effort.
+- **Peformance: Better Performance with React**
+  -  Angular has worse performance. when developing complex and dynamic web applications. This is mainly caused by bidirectional data-binding with assigned watchers.
+  -  React performs better with the feature of light weight virtual DOM and thus reduced load on browser. It does not creat additional workload since it has unidirectional data-binding process without watchers.
 ## Access
 http://csc301a1.s3-website.ca-central-1.amazonaws.com/
