@@ -40,7 +40,7 @@ For front end, we choose to use React.js. React is more managable and allowing r
 
 ##### Vue vs React
 
-#####Pros
+##### Pros
 
 -  **Maturity: React has broader package ecosystem**
   - Vue has fewer resources, available packages and third-party libraries. 
@@ -59,7 +59,7 @@ For front end, we choose to use React.js. React is more managable and allowing r
     - Vue has in-built Server side rendering capabilities which is much convenient.
 ##### Angular vs React
 
-#####Pros
+##### Pros
 - **React: Ease of Learning and evelopment**
   React is more easy to learn and angular are new to us.
   - With basic knowledge, the framework of React is much simple to understand. React is minimalistic, which do not have complicated features and dependency injection.
