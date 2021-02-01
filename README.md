@@ -38,9 +38,9 @@ For front end, we choose to use React.js. React is more managable and allowing r
     | Vue.js        | 17.3%                                                  |
     | Spring.js     | 16.4%                                                  |
 
-##### Vue vs React
+#### Vue vs React
 
-##### Pros
+#### Pros
 
 -  **Maturity: React has broader package ecosystem**
   - Vue has fewer resources, available packages and third-party libraries. 
@@ -50,16 +50,16 @@ For front end, we choose to use React.js. React is more managable and allowing r
   - React is more scalable since it uses JSX which allows reusing component in the code. Thus the code structure is neat and clean. Both HTML and CSS are expressed via JavaScript with XML syntax.
   - Vue uses HTML templating with single file component.When we are develope large project, reusing HTML templates is a huge pain and is nasty.
   
-##### Cons
+#### Cons
   - **React: Rerender all child component**
     - Vue prevents unecessary renders of child components by tracking dependecies.
     - While in React, if a component state is modified, then all the child components of this parent comonent will be re-rendered.
   - **React:No built-in Server Side Rendering**
     - React needs third-party libraries assistance to implement server side rendering
     - Vue has in-built Server side rendering capabilities which is much convenient.
-##### Angular vs React
+#### Angular vs React
 
-##### Pros
+#### Pros
 - **React: Ease of Learning and evelopment**
   React is more easy to learn and angular are new to us.
   - With basic knowledge, the framework of React is much simple to understand. React is minimalistic, which do not have complicated features and dependency injection.
@@ -67,7 +67,7 @@ For front end, we choose to use React.js. React is more managable and allowing r
 - **React: Better Performance**
   -  Angular has worse performance. when developing complex and dynamic web applications. This is mainly caused by bidirectional data-binding with assigned watchers.
   -  React performs better with the feature of light weight virtual DOM and thus reduced load on browser. It does not creat additional workload since it has unidirectional data-binding process without watchers.
-##### Cons
+#### Cons
   - **Dependency Injection:not supported in React**
     - Angular supports dependency injection and further allows having different lifecycles for different stores
     - React does not support dependency injection. It only has a global state for all components. 
@@ -79,8 +79,8 @@ For front end, we choose to use React.js. React is more managable and allowing r
 We use github Actions as our CI/CD tools in this assignment.
 #### Comparison with other CI/CD tools
 We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions, Jenkins.
-##### CircleCI vs  Github Actions
-##### Pros & Cons
+#### CircleCI vs  Github Actions
+#### Pros & Cons
   - **Pros:Ease of Use**
     - Since we are using Github as our source control platform, Github Actions is convenient to sete up. After pushing any new feature to the remote repo, it will automate the tasks. It house our code repository and pipeline under the same platfom. 
   - **Pros:Allowing Multiple config**
@@ -89,8 +89,8 @@ We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions,
     - GitHub Actions only showed the build for a week before deleting the build log.
     - While CircleCI track anlytical data on all of the jobs.
     - CircleCI introudced more builtin-features such as Manual approval/trigger.
-##### Jenkins vs Github Actions
-##### Pros & Cons
+#### Jenkins vs Github Actions
+#### Pros & Cons
   - **Pros: Clearer Structure and intuitive scripts**
     - Compared to Jenkins, Github Actions uses Yaml to create workflows and configuaration files, which has clearer structure .especially when building with mulitple operating system. Jenkins uses declarative pipelien and scripted pipelines.
    ![Comparison between Jenkins and github actons](/images/github_actions.PNG)
@@ -102,5 +102,8 @@ We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions,
 
 ## DataBase : DynamoDb
 
+## Summary
+
 ## Production website
 http://csc301a1.s3-website.ca-central-1.amazonaws.com/
+
