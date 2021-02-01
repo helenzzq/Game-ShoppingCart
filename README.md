@@ -8,7 +8,7 @@ Here's the breakdown of the stacks that we've used in this assignment.
 - Platform: Web
 - Frontend: React JS
 - Backend:Node.js
-- Database: AWS s3
+- Database: DynamoDB
 - CI/CD: Github Actions
 
 ## Platform : Web
@@ -22,7 +22,7 @@ In this assignment, we choose to develop a web application for the simple checko
 ## Frontend
 For front end, we choose to use React.js. React is more managable and allowing resuing component. It focus on Business logic not on preventing your app from exploding.
 
-#### Comparison with other techonology
+#### Comparison with other frontend techonology
 
 - **Popularity: Widespread Usage**
   - Accoding to Stackoverflow 2020,React.js is the second most popular web framework among all, as more then 35% of respondents use React.js.
@@ -58,5 +58,22 @@ For front end, we choose to use React.js. React is more managable and allowing r
 - **Peformance: Better Performance with React**
   -  Angular has worse performance. when developing complex and dynamic web applications. This is mainly caused by bidirectional data-binding with assigned watchers.
   -  React performs better with the feature of light weight virtual DOM and thus reduced load on browser. It does not creat additional workload since it has unidirectional data-binding process without watchers.
-## Access
+## Backend:
+
+## CI/CD: Github Actions
+We use github Actions as our CI/CD tools in this assignment.
+#### Comparison with other CI/CD tools
+We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions, Jenkins.
+- **CircleCI vs  Github Actions: Ease of Use**
+  - Github actions increases our productivity, code quality and delivery. After pushing any new feature to the remote repo, it will automate the tasks. It house our code repository and pipeline under the same platfom. 
+  - Compared to CircleCI, GitHub Actions are able to congiure multiple files . Although CIrcle CI also use YAML , it expect only one config file in each repository.
+- **Jenkins vs GithubActions: Clearer Structure** 
+  -Compared to Jenkins, Github Actions uses Yaml to create workflows and configuaration files, which has clearer structure .especially when building with mulitple operating system. Jenkins uses declarative pipelien and scripted pipelines.
+   ![Comparison between Jenkins and github actons](./images/github_actions.png)
+- **Cloud hosting**
+  - Github Actions hosts its own runner in the cloud for us to use to run jobs, while Jenkins deployment are mostly self-hosted. As user, we need to maintain the server in our own data centers, which is much more inconvenient than github actions
+-  
+## DataBase : DynamoDb
+
+## Production website
 http://csc301a1.s3-website.ca-central-1.amazonaws.com/
