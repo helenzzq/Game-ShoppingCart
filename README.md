@@ -93,7 +93,7 @@ We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions,
 ##### Pros & Cons
   - **Pros: Clearer Structure and intuitive scripts**
     - Compared to Jenkins, Github Actions uses Yaml to create workflows and configuaration files, which has clearer structure .especially when building with mulitple operating system. Jenkins uses declarative pipelien and scripted pipelines.
-   ![Comparison between Jenkins and github actons](images/github_actions.png)
+   ![](images/github_actions.png?raw=true)
 - **Pros:Cloud hosting in Github Actions**
   - Github Actions hosts its own runner in the cloud for us to use to run jobs, while Jenkins deployment are mostly self-hosted. As user, we need to maintain the server in our own data centers, which is much more inconvenient than github actions
 - **Cons: Bad at handling Ad hoc workflows**
