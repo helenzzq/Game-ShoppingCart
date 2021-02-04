@@ -23,11 +23,9 @@ In this assignment, we choose to develop a web application for the simple checko
 
 ## Frontend
 For front end, we choose to use React.
-As the most popular frontend techonology, React requires less learning effort and has better performance with the Virtual DOM. React is more managable and allowing resuing component.
-Thus,we choose React as our Frontend techonology.
+Here's the comparisons with other frontend techonology.
 
-
-#### Comparison with other frontend techonology
+#### Coparison with other frontend techonology
 We'll mainly compare these three Frontend options : React,Vue and Angular.
 - **Popularity: Widespread Usage**
   - Accoding to Stackoverflow 2020,React.js is the second most popular web framework among all, as more then 35% of respondents use React.js.
@@ -61,7 +59,7 @@ We'll mainly compare these three Frontend options : React,Vue and Angular.
       - Vue prevents unecessary renders of child components by tracking dependecies.
       - While in React, if a component state is modified, then all the child components of this parent comonent will be re-rendered.This will cause some lag in running speed.
     - **Vue Has built-in Server Side Rendering**
-      - React needs third-party libraries assistance to implement server side rendering.Vue has in-built Server side rendering capabilities which is much convenient.
+      - React needs third-party libraries assistance to implement server side rendering.However, Vue has in-built Server side rendering capabilities which is much convenient.
 #### Angular vs React
 
 - **Domain Covered**
@@ -84,7 +82,11 @@ We'll mainly compare these three Frontend options : React,Vue and Angular.
 - **Dependency Injection: not supported in React**
     - Angular supports dependency injection and further allows having different lifecycles for different stores
     - React does not support dependency injection. It only has a global state for all components. 
-  
+
+#### Summary
+As the most popular frontend techonology, React requires less learning effort and has better performance with the Virtual DOM. Compared the other two tools with similar features, React is more managable and has better performance.
+Thus,we choose React as our Frontend techonology.
+
 ## Backend:
 
 ## Testing Infrastructure
@@ -93,17 +95,22 @@ We'll mainly compare these three Frontend options : React,Vue and Angular.
 We use github Actions as our CI/CD tools in this assignment.
 #### Comparison with other CI/CD tools
 We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions, Jenkins.
-- **Ease of Development**
-  - Since we are using Github as our source control platform, Github Actions is convenient to set up. After pushing any new feature to the remote repo, it will automate the tasks. It house our code repository and pipeline under the same platfom. 
 - **Popularity**
-  - Both CircleCI and Jenkins are ranked as one of the best CI/CD tools in 2020. Among which, Jenkins is ranked as the top 1 best CI/CD tools in 2020.Github Actions are not in the list.
+  - Both CircleCI and Jenkins are ranked as one of the best CI/CD tools in 2020. Among which, Jenkins is ranked as the top 1 best CI/CD tools in 2020.As one of the latest CI/CD tools,Github Actions are not in the list.
+- **Ease of Development**
+  - Github Actions is the most convenient one among all three options. Since we are using Github as our source control platform, it house our code repository and pipeline under the same platfom. 
+  - For the other 2 CI/CD tools, they both need installation and the setting up process is much more inconvenient.
+
 ![Speed Comparison of CICD](./images/cicd.PNG)
 #### CircleCI vs  Github Actions
   - **Performance:Faster building speed in CircleCI**
     - According to the speed test comparsion of different CI/CD tools, CircleCI has the fastest building speed among all. While Github Actions is only in the 3rd place.
    ![Speed Comparison of CICD](./images/github.PNG)
+  - **Community Powered Shared Actions**
+    - Github Actions support shared actions which is really convenient for beginners. The published actions can be reused by others. They also automatically detect the language you are using in the repo and provide workflow suggestion and corresponding template.
+  ![CICD](./images/workflow.PNG) 
   - **Feature: Allowing Multiple config**
-    - Compared to CircleCI, GitHub Actions are able to congiure multiple files . Although CIrcle CI also use YAML , it expect only one config file in each repository.
+    - GitHub Actions are able to configure multiple files compared to CircleCI. Although CIrcleCI also use YAML , it expect only one config file in each repository.
   - **Cons:Limit build history and less feature in Github Action**
     - GitHub Actions only showed the build for a week before deleting the build log.
     - While CircleCI track anlytical data on all of the jobs. CircleCI also introudced more builtin-features such as Manual approval/trigger.
@@ -113,10 +120,15 @@ We'll mainly compare these three CI/CD tools options : CircleCI, Github Actions,
    ![Comparison between Jenkins and github actons](/images/github_actions.PNG)
 - **Hosting: Cloud hosting in Github Actions**
   - Github Actions hosts its own runner in the cloud for us to use to run jobs, while Jenkins deployment are mostly self-hosted. As user, we need to maintain the server in our own data centers, which is much more inconvenient than github actions
-- **Feature: Github Actions Is 
-- Bad at handling Ad hoc workflows**
-  - Github Actions do not cater for ad hoc jobs. It listening to git events. 
-  - While Jenkins can handle many types of jobs including bash scripts,maven,powershell. 
+- **Performance: Jenkins requires more time to run**
+  - Jenkins use sequential pipeline while Github Actions follow the coordinator and build nodes pattern.
+  - With Github Actions,multiple actions components work together to run jobs, which is much more efficient.
+  - With Jenkins,each step are executed in the deployment pipeline synchronously, which would caused more time for execution.
+- **Domain Covered**
+  - Jenkins can handle many types of jobs including bash scripts,maven,powershell. 
+  - Github Actions do not cater for ad hoc jobs. It listening to git events. However, since we are only dealing with git events in this assignment, Github Actions is sufficient for us.
+#### Summary
+All in all, despite some defects in limited domain and popularity,since we are designing a small project and use github as our source platform, Github Actions still wins with its ease of developement and good performance.
 
 ## DataBase : DynamoDb
 
