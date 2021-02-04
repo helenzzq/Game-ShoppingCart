@@ -25,10 +25,18 @@ a {
   margin-top: 125px;
   flex:1;
 }
-
+.foot{
+background-color: #ffffff;
+text-align: center;
+font-size: large;
+padding: 1rem;
+margin-top:440px;
+margin: 0.7rem;
+}
 .item{
   display: flex;
   justify-content: space-between;
+  
   align-items: center;
 }
 
@@ -39,7 +47,7 @@ a {
 
 .block {
   
-  background-color: #e0e0e0;
+  background-color: #fffefe;
   margin: 0.7rem;
   border-radius: 0.6rem;
   padding: 1rem;
@@ -70,7 +78,7 @@ nav {
 
 }
 .games{
-  background-color: #e0e0e0;
+  background-color: #ffffff;
   margin-top: 425px;
   border-radius: 0.6rem;
   padding: 1rem;
