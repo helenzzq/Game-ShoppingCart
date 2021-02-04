@@ -60,7 +60,7 @@ function App() {
             ))}
           </div>
         </div>
-        <Summary updateCart={updateCart} item={item}></Summary>
+        <Summary updateCart={updateCart} item={item} addItem={addItem}></Summary>
       </div>
     </div>
   );
