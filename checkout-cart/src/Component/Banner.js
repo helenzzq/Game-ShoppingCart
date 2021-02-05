@@ -8,9 +8,6 @@ export default function Banner(props) {
     function refresh() {
         window.location.reload();
     }
-    function contact() {
-        alert("Should you have any question.\n Please contact us through this email : lovecsc301@utoronto.ca")
-    }
     return (
         <header className="banner">
             <div className="bannerImg">
@@ -20,7 +17,7 @@ export default function Banner(props) {
             <nav >
                 <ul className="navBar">
                     <li onClick={ refresh}><button className="navg"><HomeOutlined className="ant" />Home</button></li>
-                    <li onClick={contact}><button className="navg"><PhoneOutlined className="ant"/> Contact Us</button></li>
+                
                 </ul>
             </nav>
 

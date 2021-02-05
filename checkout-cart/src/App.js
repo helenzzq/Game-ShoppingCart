@@ -43,7 +43,6 @@ function getAllItemsFromDB(setGame) {
     })
     .then(items => {
       setGame(items);
-      console.log("gameInit", items);
     })
     .catch(err => {
       console.log("getAllItemErr", err);
@@ -57,8 +56,8 @@ function updateCartToDB(items) {
     cartId = generateID();
     localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
   }
-  console.log("cartId", cartId);
-  console.log("updateTODB",items)
+  // console.log("cartId", cartId);
+  // console.log("updateTODB",items)
   const url = CARTS_URL;
   fetch(url, {
     mode: "cors",
@@ -100,7 +99,6 @@ function getCartFromDB(updateCart) {
       for (i = 0; i < cart.length; i++) {
         // eslint-disable-next-line 
         const temp = games.find(k => k.id === cart[i].itemId);
-        console.log('item', temp);
         lst.push({ ...temp, num:cart[i].count });
       }
 
@@ -212,7 +210,6 @@ function App() {
           </div>
         </div>
       </div>
-      console.log("passinItem",item);
       <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem} removeAll={removeAll}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
