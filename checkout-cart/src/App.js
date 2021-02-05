@@ -7,7 +7,10 @@ import Banner from './Component/Banner'
 import background from './photo/background.jpg'
 import { nanoid } from 'nanoid';
 
-var lsKeyForCartId = 'csc301-a1-cartId';
+
+var LOCAL_STORAGE_KEY_FOR_CARTID = 'csc301-a1-cartId';
+var CARTS_URL = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+var ITEMS_URL = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
 
 function generateID() {
   return nanoid(8);
@@ -26,14 +29,14 @@ function generateID() {
 function getCartFromDB() {
   // Get current cart id
   let cartId;
-  cartId = localStorage.getItem(lsKeyForCartId);
+  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
   if (!cartId) {
     cartId = generateID();
-    localStorage.setItem(lsKeyForCartId, cartId)
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
   }
   console.log("cartId", cartId);
 
-  const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
+  const url = CARTS_URL+'?cartId=' + cartId;
   fetch(url, {
     mode: "cors",
     method: 'GET',
@@ -57,13 +60,13 @@ function getCartFromDB() {
 function updateCartToDB(items) {
   // Get current cart id
   let cartId;
-  cartId = localStorage.getItem(lsKeyForCartId);
+  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
   if (!cartId) {
     cartId = generateID();
-    localStorage.setItem(lsKeyForCartId, cartId)
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
   }
   console.log("cartId", cartId);
-  const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+  const url = CARTS_URL;
   fetch(url, {
     mode: "cors",
     method: 'PUT',
@@ -107,7 +110,7 @@ function generateDBCartItem(game, num) {
 
 function App() {
   // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  const [dbItem, cartUpdation] = useState([]);
+  // const [dbItem, cartUpdation] = useState([]);
   const [games, setGame] = useState([]);
   const [item, updateCart] = useState([]);
 
@@ -121,7 +124,7 @@ function App() {
   SampleComponent()
   function getAllItemsFromDB() {
 
-    const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
+    const url = ITEMS_URL;
     fetch(url, {
       mode: "cors",
       method: 'GET',
