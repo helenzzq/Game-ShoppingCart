@@ -76,11 +76,7 @@ function updateCartToDB(items) {
         })
       })
       .then(res => {
-        return res.json();
-      })
-      .then(cart => {
-        // TODO: update user cart
-        console.log("update", cart);
+        console.log("updateCartToDB", res.status);
       })
       .catch(err => {
         console.log("updateCartToDB", err);
@@ -123,8 +119,8 @@ function getAllItemsFromDB() {
 
 
 function App() {
-  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  // updateCartToDB(testItems);
+  const testItems = [{count:4, itemId: "_PI0GfYp"},{count: 4, itemId:"5U76ImCT"}];
+  updateCartToDB(testItems);
   getAllItemsFromDB();
   getCartFromDB();
 
