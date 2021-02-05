@@ -29,6 +29,11 @@ jobs:
         cd checkout-cart &&
         npm run build
     
+    - name: Test Backend
+      run:
+        cd checkout-cart &&
+        npm run test
+    
     - name: Deploy to S3
       run: |
         cd checkout-cart &&
