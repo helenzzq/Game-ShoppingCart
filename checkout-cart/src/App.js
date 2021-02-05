@@ -8,11 +8,9 @@ import Banner from './Component/Banner'
 import background from './photo/background.jpg'
 import { nanoid } from 'nanoid';
 
-var lsKeyForCartId = 'csc301-a1-cartId';
-
-function generateID() {
-  return nanoid(8);
-}
+var LOCAL_STORAGE_KEY_FOR_CARTID = 'csc301-a1-cartId';
+var CARTS_URL = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+var ITEMS_URL = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
 
 /**
  * Return cart from db, an array of items and count,
@@ -27,14 +25,14 @@ function generateID() {
 function getCartFromDB() {
     // Get current cart id
     let cartId;
-    cartId = localStorage.getItem(lsKeyForCartId);
+    cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
     if (!cartId) {
       cartId = generateID();
-      localStorage.setItem(lsKeyForCartId, cartId)
+      localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
     }
     console.log("cartId", cartId);
 
-    const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
+    const url = CARTS_URL + '?cartId=' + cartId;
     fetch(url, {
       mode: "cors",
       method: 'GET',
@@ -59,13 +57,12 @@ function getCartFromDB() {
 function updateCartToDB(items) {
       // Get current cart id
       let cartId;
-      cartId = localStorage.getItem(lsKeyForCartId);
+      cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
       if (!cartId) {
         cartId = generateID();
-        localStorage.setItem(lsKeyForCartId, cartId)
+        localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
       }
-      console.log("cartId", cartId);
-      const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+      const url = CARTS_URL;
       fetch(url, {
         mode: "cors",
         method: 'PUT',
@@ -82,9 +79,6 @@ function updateCartToDB(items) {
       });
 }
 
-// // componentDidMount
-// useEffect(getAllItemsFromDB, []);
-
 /**
  * Return array of items from database,
  * follows the following model:
@@ -98,24 +92,8 @@ function updateCartToDB(items) {
  * ]
  */
 
-
-
-function App() {
-  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  // updateCartToDB(testItems);
-  const [games, setGame] = useState([]);
-  const [item, updateCart] = useState([]);
-
-  const SampleComponent = () => {
-    useEffect(() => {
-      getAllItemsFromDB()
-    }, [])
-  return (<div>foo</div>)
-  }
-  SampleComponent()
-  // getCartFromDB();
-  function getAllItemsFromDB() {
-    const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
+function getAllItemsFromDB() {
+    const url = ITEMS_URL;
     fetch(url, {
       mode: "cors",
       method: 'GET',
@@ -132,6 +110,23 @@ function App() {
       console.log("getAllItemErr", err);
     });
 }
+
+
+function generateID() {
+    return nanoid(8);
+}
+  
+
+
+function App() {
+  const testItems = [{count:4, itemId: "_PI0GfYp"},{count: 4, itemId:"5U76ImCT"}];
+  updateCartToDB(testItems);
+  getAllItemsFromDB();
+  getCartFromDB();
+
+  const { games } = GameList;
+  const [item, updateCart] = useState([]);
+  
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
     if (itemInCart) {
