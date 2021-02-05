@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
@@ -41,7 +41,7 @@ function getCartFromDB() {
       return res.json();
     })
     .then(cart => {
-      // TODO: Put data into games
+      <App ></App>
       console.log("cart", cart);
     })
     .catch(err => {
@@ -91,6 +91,7 @@ function updateCartToDB(items) {
  *  }
  * ]
  */
+
 function getAllItemsFromDB() {
     const url = ITEMS_URL;
     fetch(url, {
@@ -100,14 +101,16 @@ function getAllItemsFromDB() {
     .then(res => {
       return res.json();
     })
-    .then(items => {
-      // TODO: Put data into games
+      .then(items => {
+        setGame(items);
+        console.log(games)
       console.log("items", items);
     })
     .catch(err => {
       console.log("getAllItemErr", err);
     });
 }
+
 
 function generateID() {
     return nanoid(8);
@@ -123,7 +126,7 @@ function App() {
 
   const { games } = GameList;
   const [item, updateCart] = useState([]);
-
+  
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
     if (itemInCart) {
@@ -138,7 +141,6 @@ function App() {
 
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
-
       <div><Banner></Banner></div>
       <div className="container">
         <div className="games">
