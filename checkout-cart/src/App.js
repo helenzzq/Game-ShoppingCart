@@ -167,6 +167,7 @@ function App() {
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
       dbItem.push({ count: 1, itemId: gameItem.id })
+      cartUpdation(dbItem)
       console.log("singleItem",dbItem)
       updateCartToDB(dbItem)
     }
