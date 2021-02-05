@@ -1,3 +1,10 @@
+/**
+ * The code in this file is the latest version we have on lambda.
+ * All code here are uploaded for marking purpose only and does 
+ * not interact with anything in this repo.
+ */
+
+
 const AWS = require('aws-sdk');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 const cartsTable = process.env.cartsTable;
