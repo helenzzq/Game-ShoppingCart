@@ -29,8 +29,6 @@ export default function Summary(props) {
     constructor(props) {
       super(props);
       this.state = { discountcode: '', total: 0, appliedCoupon: "none", showMsg: "none" };
-      this.handleChangeListener = this.handleChangeListener.bind(this);
-      this.submitListener = this.submitListener.bind(this);
     }
     displayDiscount = () => {
       if (this.state.appliedCoupon === "none") {
@@ -122,11 +120,11 @@ export default function Summary(props) {
     <div className="order" style={{ marginLeft: "0.2rem" }} >
       <h1 className="title">Order Summary</h1>
       <div style={{ textAlign: "center" }}>
-        {item.length === 0 &&
-          <img alt="Empty cart" className="empty" src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
+      {item.length === 0 &&
+           <img alt="Empty cart" className="empty" src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
       </div>
       {item.map((item) => {
-        console.log(item)
+
         return (
           <div key={item.id} className="entry">
             <div style={{ flex: 5 }}>

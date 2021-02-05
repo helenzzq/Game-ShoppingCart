@@ -40,7 +40,7 @@ function updateCartToDB(items) {
     localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
   }
   console.log("cartId", cartId);
-  console.log(items)
+  console.log("updateTODB",items)
   const url = CARTS_URL;
   fetch(url, {
     mode: "cors",
@@ -71,14 +71,12 @@ function App() {
     useEffect(() => {
       getAllItemsFromDB()
       getCartFromDB(updateCart,games)
-      console.log(games)
+
     }, [])
     return (<div></div>)
   }
   SampleComponent()
-  console.log(games)
   function getAllItemsFromDB() {
-    
     const url = ITEMS_URL;
     fetch(url, {
       mode: "cors",
@@ -89,7 +87,7 @@ function App() {
       })
       .then(items => {
         setGame(items);
-        console.log("items", items);
+        console.log("gameInit", items);
       })
       .catch(err => {
         console.log("getAllItemErr", err);
@@ -130,15 +128,25 @@ function getCartFromDB(updateCart,games) {
     })
     .then(cart => {
       const lst = []
-      for (var i = 0; i < games.length; i++){
+      const lst_s =[]
+      for (var i = 0; i < cart.length; i++){
         // eslint-disable-next-line 
-        const temp = games.find(k => k.id === cart[i].itemId);
-        lst.push(temp);
+        var temp = games.find(k => k.id === cart[i].itemId);
+
+        console.log("temp", temp);
+        if (lst_s.includes(temp)) {
+          var tempItem = lst.find(x => x.id === temp.id);
+          tempItem.num += 1;
+        }
+        else {
+          lst.push({ ...temp, num: 1 });
+          lst_s.push(temp)
+        }
       }
+      console.log("item",lst);
+      console.log("cart", cart);
       updateCart(lst)
       
-      
-      console.log("cart", cart);
     })
     .catch(err => {
       console.log("getCartFromDB", err);
@@ -155,12 +163,14 @@ function getCartFromDB(updateCart,games) {
       );
       cartUpdation([...dbItem, {count: itemInCart.num + 1, itemId: itemInCart.id }])
       updateCartToDB(dbItem)
-      console.log(dbItem)
+      // getCartFromDB(updateCart,games)
+      console.log("add",dbItem)
     }
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
       cartUpdation([...dbItem, { count: 1, itemId: gameItem.id }])
       updateCartToDB(dbItem)
+      // getCartFromDB(updateCart,games)
 
     }
   }
@@ -176,6 +186,8 @@ function getCartFromDB(updateCart,games) {
       );
       cartUpdation([...dbItem, {count: itemInCart.num -1, itemId: itemInCart.id }])
       updateCartToDB(dbItem)
+      // getCartFromDB(updateCart,games)
+
     }
   };
 
@@ -183,6 +195,8 @@ function getCartFromDB(updateCart,games) {
     updateCart(item.filter((x) => x.id !== gameItem.id));
     cartUpdation([])
     updateCartToDB(dbItem)
+    // getCartFromDB(updateCart,games)
+
   }
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
@@ -199,7 +213,7 @@ function getCartFromDB(updateCart,games) {
         </div>
         
       </div>
-
+      console.log("passinItem",item);
       <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
