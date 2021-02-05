@@ -6,32 +6,128 @@ import Game from './Component/Game';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
+import { nanoid } from 'nanoid';
 
-// class fetch extends Component{
-//     componentDidMount(){
-//     fetch(API + DEFAULT_QUERY)
-//       .then(response => response.json())
-//       .then();
-//   }
-//   componentDidUpdate(props) {
-//     //Pass in the quantity of this item in the cart and the item id
-//       const {id , num} = props;
-//     // submit update to database
-//       updateDataBase();
-//   }
-//     updateDataBase(props) {
+var lsKeyForCartId = 'csc301-a1-cartId';
 
-//   }
+function generateID() {
+  return nanoid(8);
+}
 
-//   function getDataBase() {
+/**
+ * Return cart from db, an array of items and count,
+ * model:
+ * [
+ *  {
+ *   itemId: string,
+ *   count: Number
+ *  }
+ * ]
+ */
+function getCartFromDB() {
+    // Get current cart id
+    let cartId;
+    cartId = localStorage.getItem(lsKeyForCartId);
+    if (!cartId) {
+      cartId = generateID();
+      localStorage.setItem(lsKeyForCartId, cartId)
+    }
+    console.log("cartId", cartId);
 
-//     // Array of items
-//     return [];
-//   }
+    const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
+    fetch(url, {
+      mode: "cors",
+      method: 'GET',
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(cart => {
+      // TODO: Put data into games
+      console.log("cart", cart);
+    })
+    .catch(err => {
+      console.log("getCartFromDB", err);
+    });
+    
+}
 
-// }
+/**
+ * Example
+    items = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}]
+ */
+function updateCartToDB(items) {
+      // Get current cart id
+      let cartId;
+      cartId = localStorage.getItem(lsKeyForCartId);
+      if (!cartId) {
+        cartId = generateID();
+        localStorage.setItem(lsKeyForCartId, cartId)
+      }
+      console.log("cartId", cartId);
+  
+      const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+      fetch(url, {
+        mode: "cors",
+        method: 'PUT',
+        body: JSON.stringify({
+          cartId: cartId,
+          items: items
+        })
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(cart => {
+        // TODO: update user cart
+        console.log("update", cart);
+      })
+      .catch(err => {
+        console.log("updateCartToDB", err);
+      });
+}
+
+// // componentDidMount
+// useEffect(getAllItemsFromDB, []);
+
+/**
+ * Return array of items from database,
+ * follows the following model:
+ * [
+ *  {
+ *   id: string,
+ *   image: string,
+ *   name: string,
+ *   price: Number
+ *  }
+ * ]
+ */
+function getAllItemsFromDB() {
+    const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
+    fetch(url, {
+      mode: "cors",
+      method: 'GET',
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(items => {
+      // TODO: Put data into games
+      console.log("items", items);
+    })
+    .catch(err => {
+      console.log("getAllItemErr", err);
+    });
+}
+
+
 
 function App() {
+  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
+  // updateCartToDB(testItems);
+  getAllItemsFromDB();
+  getCartFromDB();
+
   const { games } = GameList;
   const [item, updateCart] = useState([]);
 
