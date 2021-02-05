@@ -75,11 +75,7 @@ function updateCartToDB(items) {
         })
       })
       .then(res => {
-        return res.json();
-      })
-      .then(cart => {
-        // TODO: update user cart
-        console.log("update", cart);
+        console.log("updateCartToDB", res.status);
       })
       .catch(err => {
         console.log("updateCartToDB", err);
