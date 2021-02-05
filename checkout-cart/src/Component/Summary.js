@@ -9,17 +9,17 @@ export default function Summary(props) {
     const { tag, tagName } = props;
     return (
       <div className="entry">
-        <div style={{flex: 2 }}>{tag}</div>
-        <div style={{textAlign: 'right',flex:1}}>${tagName.toFixed(2)}</div>
+        <div style={{ flex: 2 }}>{tag}</div>
+        <div style={{ textAlign: 'right', flex: 1 }}>${tagName.toFixed(2)}</div>
       </div>
     );
   }
-    
+
   const deleteItem = (gameItem) => {
     const itemInCart = item.find((x) => x.id === gameItem.id);
     if (itemInCart.num === 1) {
       removeAll(gameItem)
-          
+
     } else {
       updateCart(
         item.map((x) =>
@@ -34,39 +34,46 @@ export default function Summary(props) {
   class DiscountForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { discountcode: '',total:0, appliedCoupon:"none"};
+      this.state = { discountcode: '', total: 0, appliedCoupon: "none", showMsg: "none" };
       this.handleChangeListener = this.handleChangeListener.bind(this);
       this.submitListener = this.submitListener.bind(this);
     }
     displayDiscount = () => {
-      this.setState({appliedCoupon:"block"});
+      if (this.state.appliedCoupon === "none") {
 
+        if (this.state.showMsg === "none") {
+          this.setState({ appliedCoupon: "block" });
+
+        }
+
+        else {
+
+
+        }
+      }
     }
 
     submitListener = (event) => {
       event.preventDefault();
       if (this.state.discountcode !== 'csc301') {
-        alert("The coupon is invalid!");
+        alert("The coupon is invalid! Please re-enter a valid coupon");
       }
       else {
-        
         if (this.state.appliedCoupon !== "none") {
           alert("The coupon is valid! You received 10% off on your purchase!");
           const totals = this.state.total * 0.9;
-          this.setState({ total: totals , appliedCoupon:"none"});
+          this.setState({ total: totals, appliedCoupon: "none", showMsg: "block" });
         }
-
-        
       }
 
     }
     handleChangeListener = (event) => {
-      this.setState({discountcode: event.target.value});
+      this.setState({ discountcode: event.target.value });
     }
     render() {
-    const subtotal = item.reduce((a, c) => a + c.price * c.num, 0);
-    const tax = subtotal * 0.13;
-    const shipping = 0;
+      const subtotal = item.reduce((a, c) => a + c.price * c.num, 0);
+      const tax = subtotal * 0.13;
+      const shipping = 0;
 
       if (this.state.total === 0) {
         const tempTotal = subtotal + tax + shipping;
@@ -81,17 +88,20 @@ export default function Summary(props) {
             <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
             <PriceTag tag="Subtotal" tagName={subtotal} ></PriceTag>
             <hr />
-            <div id="form" style={{ display:this.state.appliedCoupon}}>
-        <form  onSubmit={this.submitListener}>
-              Discount Code: 
+
+            <div id="form" style={{ display: this.state.appliedCoupon }}>
+              <form onSubmit={this.submitListener}>
+                Discount Code:
         <input
-          type='text'
-          onChange={this.handleChangeListener}/>
-          <input type='submit' className="submit" value="Apply" />
-        </form>
+                  type='text'
+                  onChange={this.handleChangeListener} />
+                <input type='submit' className="submit" value="Apply" />
+              </form>
+              <p>Student in CSC301 can enjoy exclusive 10% offer, coupon: csc301</p>
             </div>
             <div style={{ textAlign: "right" }}>
-        <h2 className="boldtext">Total:${this.state.total.toFixed(2)}</h2></div>
+              <p className="boldtext" style={{ display: this.state.showMsg }}>Coupon Applied: 10% Off !</p>
+              <h2 className="boldtext">Total:${this.state.total.toFixed(2)}</h2></div>
 
             <hr />
             <div className="entry">
@@ -104,7 +114,8 @@ export default function Summary(props) {
     }
   }
 
- 
+
+
 
   const removeAll = (gameItem) => {
     updateCart(item.filter((x) => x.id !== gameItem.id));
@@ -113,39 +124,39 @@ export default function Summary(props) {
   function DisplaySummary() {
     return (
       item.length !== 0 && (
-          <DiscountForm  ></DiscountForm>
+        <DiscountForm  ></DiscountForm>
       )
     );
   }
 
   return (
     <aside className="block" >
-            <h1 className="title">Order Summary</h1>
-            <div>
-                {item.length === 0 &&
-                    <img alt="Empty cart" style={{scale:0.5, marginLeft : "67px"}} src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
-                </div>
-                {item.map((item)=>{
-                    return (
-                        <div key={item.id} className="entry">
-                            <div  style={{flex: 2}}>
-                                {item.name}
-                            </div>
-                            <div  style={{flex: 2}}>
-                                <button onClick={() => addItem(item)} className="add">+</button>
-                                {'    '}
-                                <button onClick={() => deleteItem(item)} className="removeSingleItem"> - </button>
-                            </div>
-                            <div  style={{flex: 2}}>
-                                {item.num} x ${item.price.toFixed(2)}
-                            </div>
-                            <a className="removeAll" href="#!" onClick={() => removeAll(item)}>{removeIcon}</a>
-                        </div>
+      <h1 className="title">Order Summary</h1>
+      <div>
+        {item.length === 0 &&
+          <img alt="Empty cart" style={{ scale: 0.5, marginLeft: "67px" }} src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
+      </div>
+      {item.map((item) => {
+        return (
+          <div key={item.id} className="entry">
+            <div style={{ flex: 2 }}>
+              {item.name}
+            </div>
+            <div style={{ flex: 2 }}>
+              <button onClick={() => addItem(item)} className="add">+</button>
+              {'    '}
+              <button onClick={() => deleteItem(item)} className="removeSingleItem"> - </button>
+            </div>
+            <div style={{ flex: 2 }}>
+              {item.num} x ${item.price.toFixed(2)}
+            </div>
+            <a className="removeAll" href="#!" onClick={() => removeAll(item)}>{removeIcon}</a>
+          </div>
 
-                    );
-                })}
-                <DisplaySummary></DisplaySummary>
-            
-        </aside>
+        );
+      })}
+      <DisplaySummary></DisplaySummary>
+
+    </aside>
   );
 }

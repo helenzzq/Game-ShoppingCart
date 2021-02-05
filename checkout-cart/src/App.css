@@ -112,6 +112,7 @@ button {
 }
 .hoverBtn{
   color:white;
+  font-weight: bold;
 }
 .hoverBtn:hover {
   background-color:#e45c02 ;
@@ -134,7 +135,27 @@ button {
 }
 
 .submit{
-  background-color:  #ffe819;
+  border:none;
+  font-size: 0.8rem;
+  padding: 0.3rem;
+  margin: 0.2rem;
   border-radius: 0.3rem;
-  margin-left:80px;
+  background-color:  #e48100;
+  color:white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.submit:hover {
+  background-color:#e45c02 ;
+  color:white;
+ }
+ .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.modal_content {
+  background-color: white;
+  position: absolute;
 }
