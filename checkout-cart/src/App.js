@@ -1,7 +1,6 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
-import GameList from './GameList'
 import Game from './Component/Game';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
@@ -25,31 +24,30 @@ function generateID() {
  * ]
  */
 function getCartFromDB() {
-    // Get current cart id
-    let cartId;
-    cartId = localStorage.getItem(lsKeyForCartId);
-    if (!cartId) {
-      cartId = generateID();
-      localStorage.setItem(lsKeyForCartId, cartId)
-    }
-    console.log("cartId", cartId);
+  // Get current cart id
+  let cartId;
+  cartId = localStorage.getItem(lsKeyForCartId);
+  if (!cartId) {
+    cartId = generateID();
+    localStorage.setItem(lsKeyForCartId, cartId)
+  }
+  console.log("cartId", cartId);
 
-    const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
-    fetch(url, {
-      mode: "cors",
-      method: 'GET',
-    })
+  const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
+  fetch(url, {
+    mode: "cors",
+    method: 'GET',
+  })
     .then(res => {
       return res.json();
     })
     .then(cart => {
-      <App ></App>
       console.log("cart", cart);
     })
     .catch(err => {
       console.log("getCartFromDB", err);
     });
-    
+
 }
 
 /**
@@ -57,33 +55,31 @@ function getCartFromDB() {
     items = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}]
  */
 function updateCartToDB(items) {
-      // Get current cart id
-      let cartId;
-      cartId = localStorage.getItem(lsKeyForCartId);
-      if (!cartId) {
-        cartId = generateID();
-        localStorage.setItem(lsKeyForCartId, cartId)
-      }
-      console.log("cartId", cartId);
-      const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
-      fetch(url, {
-        mode: "cors",
-        method: 'PUT',
-        body: JSON.stringify({
-          cartId: cartId,
-          items: items
-        })
-      })
-      .then(res => {
-        console.log("updateCartToDB", res.status);
-      })
-      .catch(err => {
-        console.log("updateCartToDB", err);
-      });
+  // Get current cart id
+  let cartId;
+  cartId = localStorage.getItem(lsKeyForCartId);
+  if (!cartId) {
+    cartId = generateID();
+    localStorage.setItem(lsKeyForCartId, cartId)
+  }
+  console.log("cartId", cartId);
+  const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+  fetch(url, {
+    mode: "cors",
+    method: 'PUT',
+    body: JSON.stringify({
+      cartId: cartId,
+      items: items
+    })
+  })
+    .then(res => {
+      console.log("updateCartToDB", res.status);
+    })
+    .catch(err => {
+      console.log("updateCartToDB", err);
+    });
 }
 
-// // componentDidMount
-// useEffect(getAllItemsFromDB, []);
 
 /**
  * Return array of items from database,
@@ -98,55 +94,68 @@ function updateCartToDB(items) {
  * ]
  */
 
+function generateDBCartItem(game, num) {
+  const testItems = [{ count:num, itemId: game.id }];
+  console.log(testItems);
+  return (
+
+    updateCartToDB(testItems)
+
+  );
+}
 
 
 function App() {
   // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  // updateCartToDB(testItems);
+  const [dbItem, cartUpdation] = useState([]);
   const [games, setGame] = useState([]);
   const [item, updateCart] = useState([]);
+
 
   const SampleComponent = () => {
     useEffect(() => {
       getAllItemsFromDB()
     }, [])
-  return (<div>foo</div>)
+    return (<div>foo</div>)
   }
   SampleComponent()
-  // getCartFromDB();
   function getAllItemsFromDB() {
+
     const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
     fetch(url, {
       mode: "cors",
       method: 'GET',
     })
-    .then(res => {
-      return res.json();
-    })
+      .then(res => {
+        return res.json();
+      })
       .then(items => {
         setGame(items);
-        console.log(games)
-      console.log("items", items);
-    })
-    .catch(err => {
-      console.log("getAllItemErr", err);
-    });
-}
+        console.log("items", items);
+      })
+      .catch(err => {
+        console.log("getAllItemErr", err);
+      });
+  }
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
     if (itemInCart) {
       updateCart(item.map(x => x.id === gameItem.id ? {
         ...itemInCart, num: itemInCart.num + 1
-      } : x));
+      } : x)
+      );
+      generateDBCartItem(gameItem, itemInCart.num);
+
     }
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
+
     }
   }
 
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
-      <div><Banner></Banner></div>
+      <Banner></Banner>
       <div className="container">
         <div className="games">
           <h1 className="title">Hottest Sale</h1>
@@ -156,10 +165,10 @@ function App() {
             ))}
           </div>
         </div>
-        <Summary updateCart={updateCart} item={item} addItem={addItem}></Summary>
+        <Summary updateCart={updateCart} item={item} addItem={addItem} updateDB={updateCartToDB}></Summary>
       </div>
       <div className="foot">About Us/Contact Us/Join Us/
-      <br></br>2021 Gamer Galaxy. All Rights Reseved. 
+      <br></br>2021 Gamer Galaxy. All Rights Reseved.
       </div>
 
     </div>
