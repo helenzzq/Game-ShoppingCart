@@ -31,3 +31,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build frontend
         run: npm build
+      
+      - name: Test Server
+        run: npm test
