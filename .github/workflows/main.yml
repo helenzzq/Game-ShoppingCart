@@ -33,4 +33,4 @@ jobs:
         run: npm build
       
       - name: Test Server
-        run: npm test
+        run: cd checkout-cart && npm test
