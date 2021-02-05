@@ -75,8 +75,8 @@ http://csc301a1.s3-website.ca-central-1.amazonaws.com/
     - cartId: string
     - items: [{itemId: string, count: Number}...]
 - **CI/CD**: GitHub Actions
-  - Continuous Integration: on pull request to dev branch, build and test.
-  - Continuous Deployment: on pull request to main branch, build, test, then deploy to S3.
+  - Continuous Integration: on pull request or push to dev branch, do build and test.
+  - Continuous Deployment: on pull request or push to main branch, do build, test, then deploy to S3.
 
 
 
