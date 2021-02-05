@@ -34,18 +34,29 @@ export default function Summary(props) {
   class DiscountForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { discountcode: '',total:0};
+      this.state = { discountcode: '',total:0, appliedCoupon:"none"};
+      this.handleChangeListener = this.handleChangeListener.bind(this);
+      this.submitListener = this.submitListener.bind(this);
     }
-    
+    displayDiscount = () => {
+      this.setState({appliedCoupon:"block"});
+
+    }
+
     submitListener = (event) => {
       event.preventDefault();
       if (this.state.discountcode !== 'csc301') {
         alert("The coupon is invalid!");
       }
       else {
-        alert("The coupon is valid! You received 10% off on your purchase!");
-        const subtotal = 0.1 * this.state.total;
-        this.setState({ total: subtotal, appliedCoupon:true }) 
+        
+        if (this.state.appliedCoupon !== "none") {
+          alert("The coupon is valid! You received 10% off on your purchase!");
+          const totals = this.state.total * 0.9;
+          this.setState({ total: totals , appliedCoupon:"none"});
+        }
+
+        
       }
 
     }
@@ -59,17 +70,9 @@ export default function Summary(props) {
 
       if (this.state.total === 0) {
         const tempTotal = subtotal + tax + shipping;
-        if (this.state.appliedCoupon === true){
-          const totals = tempTotal * 0.9;
-          this.setState({ total: totals });
-        }
-        else {
-          this.setState({ total: tempTotal });
-          
-        }
-
+        this.setState({ total: tempTotal });
       }
-    
+
       return (
         item.length !== 0 && (
           <>
@@ -78,13 +81,13 @@ export default function Summary(props) {
             <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
             <PriceTag tag="Subtotal" tagName={subtotal} ></PriceTag>
             <hr />
-        <div  id="form">
+            <div id="form" style={{ display:this.state.appliedCoupon}}>
         <form  onSubmit={this.submitListener}>
               Discount Code: 
         <input
           type='text'
           onChange={this.handleChangeListener}/>
-          <input type='submit' value="submit" />
+          <input type='submit' className="submit" value="Apply" />
         </form>
             </div>
             <div style={{ textAlign: "right" }}>
@@ -92,7 +95,7 @@ export default function Summary(props) {
 
             <hr />
             <div className="entry">
-              <button className="hoverBtn" onClick={() => displayDiscount()}>
+              <button className="hoverBtn" onClick={() => this.displayDiscount()}>
                 Proceed to Checkout
             </button>
             </div>
@@ -101,9 +104,7 @@ export default function Summary(props) {
     }
   }
 
-  function displayDiscount() {
-    document.getElementById("form").style.display("block");
-  }
+ 
 
   const removeAll = (gameItem) => {
     updateCart(item.filter((x) => x.id !== gameItem.id));

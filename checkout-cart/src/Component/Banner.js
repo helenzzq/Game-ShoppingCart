@@ -11,8 +11,6 @@ export default function Banner(props) {
             <nav >
                 <ul className="navBar">
                     <li>Home</li>
-                    <li>SignUp</li>
-                    <li>ShoppingCart</li>
                     <li>Contact Us</li>
                 </ul>
             </nav>
