@@ -26,11 +26,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install dependencies
-        run: npm install
+        run: cd checkout-cart && npm install
 
       # Runs a set of commands using the runners shell
       - name: Build frontend
-        run: npm build
+        run: cd checkout-cart && npm build
       
       - name: Test Server
         run: cd checkout-cart && npm test
