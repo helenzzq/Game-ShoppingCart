@@ -98,7 +98,7 @@ function getCartFromDB(updateCart) {
       var lst = []
       const lst_s = []
  
-      for (var i = 0; i < cart.length; i++){
+      for (let i = 0; i < cart.length; i++){
         // eslint-disable-next-line 
         console.log('gamei', games);
         const temp = games.find(k => k.id === cart[i].itemId);
