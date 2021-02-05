@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import Game from './Component/Game';
+import GameList from './GameList';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
@@ -31,6 +32,23 @@ function generateID() {
  * Example
     items = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}]
  */
+function getAllItemsFromDB(setGame) {
+  const url = ITEMS_URL;
+  fetch(url, {
+    mode: "cors",
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(items => {
+      setGame(items);
+      console.log("gameInit", items);
+    })
+    .catch(err => {
+      console.log("getAllItemErr", err);
+    });
+}
 function updateCartToDB(items) {
   // Get current cart id
   let cartId;
@@ -57,7 +75,55 @@ function updateCartToDB(items) {
       console.log("updateCartToDB", err);
     });
 }
+  
+function getCartFromDB(updateCart) {
+  // Get current cart id
+  let cartId;
+  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
+  if (!cartId) {
+    cartId = generateID();
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
+  }
+  console.log("cartId", cartId);
+  const {games} = GameList
+  const url = CARTS_URL+'?cartId=' + cartId;
+  fetch(url, {
+    mode: "cors",
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(cart => {
+      var lst = []
+      const lst_s = []
+ 
+      for (var i = 0; i < cart.length; i++){
+        // eslint-disable-next-line 
+        console.log('gamei', games);
+        const temp = games.find(k => k.id === cart[i].itemId);
+        console.log("temp", temp);
+        if (lst_s.includes(temp)) {
+          var tempItem = lst.find(x => x.id === temp.id);
+          lst = lst.filter((item) => item.id !== temp.id);
+          var d = tempItem.num + 1;
+          lst.push({ ...temp, num: d });
+        }
+        else {
+          lst.push({ ...temp, num: 1 });
+          lst_s.push(temp)
+        }
+      }
+      console.log('item', lst);
+      console.log("cart", cart);
+      updateCart(lst)
+      
+    })
+    .catch(err => {
+      console.log("getCartFromDB", err);
+    });
 
+}
 
 
 
@@ -69,30 +135,14 @@ function App() {
   
   const SampleComponent = () => {
     useEffect(() => {
-      getAllItemsFromDB()
-      getCartFromDB(updateCart,games)
+      getAllItemsFromDB(setGame)
+      getCartFromDB(updateCart)
 
     }, [])
     return (<div></div>)
   }
   SampleComponent()
-  function getAllItemsFromDB() {
-    const url = ITEMS_URL;
-    fetch(url, {
-      mode: "cors",
-      method: 'GET',
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(items => {
-        setGame(items);
-        console.log("gameInit", items);
-      })
-      .catch(err => {
-        console.log("getAllItemErr", err);
-      });
-  }
+
 
   /**
  * Return array of items from database,
@@ -107,52 +157,7 @@ function App() {
  * ]
  */
 
-  
-function getCartFromDB(updateCart,games) {
-  // Get current cart id
-  let cartId;
-  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
-  if (!cartId) {
-    cartId = generateID();
-    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
-  }
-  console.log("cartId", cartId);
 
-  const url = CARTS_URL+'?cartId=' + cartId;
-  fetch(url, {
-    mode: "cors",
-    method: 'GET',
-  })
-    .then(res => {
-      return res.json();
-    })
-    .then(cart => {
-      const lst = []
-      const lst_s =[]
-      for (var i = 0; i < cart.length; i++){
-        // eslint-disable-next-line 
-        const temp = games.find(k => k.id === cart[i].itemId);
-
-        console.log("temp", temp);
-        if (lst_s.includes(temp)) {
-          var tempItem = lst.find(x => x.id === temp.id);
-          tempItem.num += 1;
-        }
-        else {
-          lst.push({ ...temp, num: 1 });
-          lst_s.push(temp)
-        }
-      }
-      console.log("item",lst);
-      console.log("cart", cart);
-      updateCart(lst)
-      
-    })
-    .catch(err => {
-      console.log("getCartFromDB", err);
-    });
-
-}
 
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
@@ -163,15 +168,14 @@ function getCartFromDB(updateCart,games) {
       );
       cartUpdation([...dbItem, {count: itemInCart.num + 1, itemId: itemInCart.id }])
       updateCartToDB(dbItem)
-      // getCartFromDB(updateCart,games)
+
       console.log("add",dbItem)
     }
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
+      console.log(gameItem)
       cartUpdation([...dbItem, { count: 1, itemId: gameItem.id }])
       updateCartToDB(dbItem)
-      // getCartFromDB(updateCart,games)
-
     }
   }
   const deleteItem = (gameItem) => {
@@ -186,7 +190,7 @@ function getCartFromDB(updateCart,games) {
       );
       cartUpdation([...dbItem, {count: itemInCart.num -1, itemId: itemInCart.id }])
       updateCartToDB(dbItem)
-      // getCartFromDB(updateCart,games)
+      getCartFromDB(updateCart)
 
     }
   };
@@ -195,7 +199,6 @@ function getCartFromDB(updateCart,games) {
     updateCart(item.filter((x) => x.id !== gameItem.id));
     cartUpdation([])
     updateCartToDB(dbItem)
-    // getCartFromDB(updateCart,games)
 
   }
   return (
@@ -211,10 +214,9 @@ function getCartFromDB(updateCart,games) {
             ))}
           </div>
         </div>
-        
       </div>
       console.log("passinItem",item);
-      <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem}></Summary>
+      <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem} removeAll={removeAll}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
       </div>
