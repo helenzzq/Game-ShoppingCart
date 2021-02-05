@@ -65,7 +65,6 @@ function updateCartToDB(items) {
         localStorage.setItem(lsKeyForCartId, cartId)
       }
       console.log("cartId", cartId);
-  
       const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
       fetch(url, {
         mode: "cors",
