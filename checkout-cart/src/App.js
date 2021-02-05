@@ -125,24 +125,22 @@ function getCartFromDB(updateCart,games) {
     mode: "cors",
     method: 'GET',
   })
-    .then(res => {
-      return res.json();
-    })
-    .then(cart => {
-      const lst = []
-      for (var i = 0; i < games.length; i++){
-        // eslint-disable-next-line 
-        const temp = games.find(k => k.id === cart[i].itemId);
-        lst.push(temp);
-      }
-      updateCart(lst)
-      
-      
-      console.log("cart", cart);
-    })
-    .catch(err => {
-      console.log("getCartFromDB", err);
-    });
+  .then(res => {
+    return res.json();
+  })
+  .then(cart => {
+    const lst = []
+    for (var i = 0; i < games.length; i++){
+      // eslint-disable-next-line 
+      const temp = games.find(k => k.id === cart[i].itemId);
+      lst.push(temp);
+    }
+    updateCart(lst)
+    console.log("cart", cart);
+  })
+  .catch(err => {
+    console.log("getCartFromDB", err);
+  });
 
 }
 
