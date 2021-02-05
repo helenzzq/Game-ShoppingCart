@@ -10,7 +10,6 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 const cartsTable = process.env.cartsTable;
 
 exports.handler = async (event, context) => {
-    //console.log('Received event:', JSON.stringify(event, null, 2));
 
     let body;
     let statusCode = '200';
@@ -39,7 +38,6 @@ exports.handler = async (event, context) => {
                 break;
 
             case 'PUT':
-                // body = await dynamo.update(JSON.parse(event.body)).promise();
                 const {cartId, items} = JSON.parse(event.body);
                 await dynamo.put({
                     TableName: cartsTable,
