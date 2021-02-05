@@ -135,7 +135,7 @@ export default function Summary(props) {
               <button onClick={() => deleteItem(item)} className="removeSingleItem"> - </button>
             </div>
             <div style={{ flex: 5 }}>
-
+              
               {item.num} x ${item.price.toFixed(2)}
             </div>
             <a className="removeAll" href="#!" onClick={() => removeAll(item)}>{removeIcon}</a>

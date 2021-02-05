@@ -95,26 +95,15 @@ function getCartFromDB(updateCart) {
       return res.json();
     })
     .then(cart => {
-      var lst = []
-      const lst_s = []
- 
-      for (var i = 0; i < cart.length; i++){
+      const lst = [];
+      let i;
+      for (i = 0; i < cart.length; i++) {
         // eslint-disable-next-line 
-        console.log('gamei', games);
         const temp = games.find(k => k.id === cart[i].itemId);
-        console.log("temp", temp);
-        if (lst_s.includes(temp)) {
-          var tempItem = lst.find(x => x.id === temp.id);
-          lst = lst.filter((item) => item.id !== temp.id);
-          var d = tempItem.num + 1;
-          lst.push({ ...temp, num: d });
-        }
-        else {
-          lst.push({ ...temp, num: 1 });
-          lst_s.push(temp)
-        }
+        console.log('item', temp);
+        lst.push({ ...temp, num:cart[i].count });
       }
-      console.log('item', lst);
+
       console.log("cart", cart);
       updateCart(lst)
       
@@ -161,22 +150,27 @@ function App() {
 
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
+    console.log("dbItembefore",dbItem)
     if (itemInCart) {
+
       updateCart(item.map(x => x.id === gameItem.id ? {
         ...itemInCart, num: itemInCart.num + 1
       } : x)
       );
-      cartUpdation([...dbItem, {count: itemInCart.num + 1, itemId: itemInCart.id }])
+      console.log("item", itemInCart.id)
+      const s = dbItem.find(k => k.id === gameItem.id);
+      dbItem.splice(dbItem.indexOf(s), 1);
+      dbItem.push({ count: itemInCart.num + 1, itemId: itemInCart.id })
+      console.log("dbItem",dbItem)
       updateCartToDB(dbItem)
-
-      console.log("add",dbItem)
     }
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
-      console.log(gameItem)
-      cartUpdation([...dbItem, { count: 1, itemId: gameItem.id }])
+      dbItem.push({ count: 1, itemId: gameItem.id })
+      console.log("singleItem",dbItem)
       updateCartToDB(dbItem)
     }
+
   }
   const deleteItem = (gameItem) => {
     const itemInCart = item.find((x) => x.id === gameItem.id);
@@ -188,17 +182,19 @@ function App() {
           x.id === gameItem.id ? { ...itemInCart, num: itemInCart.num - 1 } : x
         )
       );
-      cartUpdation([...dbItem, {count: itemInCart.num -1, itemId: itemInCart.id }])
-      updateCartToDB(dbItem)
-      getCartFromDB(updateCart)
+      removeAll(gameItem);
+      dbItem.push({ count: itemInCart.num - 1, itemId: itemInCart.id });
 
     }
+    updateCartToDB(dbItem)
   };
 
   const removeAll = (gameItem) => {
     updateCart(item.filter((x) => x.id !== gameItem.id));
-    cartUpdation([])
+    const s = dbItem.find(k => k.id === gameItem.id);
+    dbItem.splice(dbItem.indexOf(s), 1);
     updateCartToDB(dbItem)
+    // getCartFromDB(dbItem)
 
   }
   return (
