@@ -26,32 +26,32 @@ function generateID() {
  *  }
  * ]
  */
-function getCartFromDB() {
-  // Get current cart id
-  let cartId;
-  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
-  if (!cartId) {
-    cartId = generateID();
-    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
-  }
-  console.log("cartId", cartId);
+// function getCartFromDB() {
+//   // Get current cart id
+//   let cartId;
+//   cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
+//   if (!cartId) {
+//     cartId = generateID();
+//     localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
+//   }
+//   console.log("cartId", cartId);
 
-  const url = CARTS_URL+'?cartId=' + cartId;
-  fetch(url, {
-    mode: "cors",
-    method: 'GET',
-  })
-    .then(res => {
-      return res.json();
-    })
-    .then(cart => {
-      console.log("cart", cart);
-    })
-    .catch(err => {
-      console.log("getCartFromDB", err);
-    });
+//   const url = CARTS_URL+'?cartId=' + cartId;
+//   fetch(url, {
+//     mode: "cors",
+//     method: 'GET',
+//   })
+//     .then(res => {
+//       return res.json();
+//     })
+//     .then(cart => {
+//       console.log("cart", cart);
+//     })
+//     .catch(err => {
+//       console.log("getCartFromDB", err);
+//     });
 
-}
+// }
 
 /**
  * Example
