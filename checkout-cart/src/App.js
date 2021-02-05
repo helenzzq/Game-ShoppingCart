@@ -62,6 +62,10 @@ function App() {
         </div>
         <Summary updateCart={updateCart} item={item} addItem={addItem}></Summary>
       </div>
+      <div className="foot">About Us/Contact Us/Join Us/
+      <br></br>2021 Gamer Galaxy. All Rights Reseved. 
+      </div>
+
     </div>
   );
 }
