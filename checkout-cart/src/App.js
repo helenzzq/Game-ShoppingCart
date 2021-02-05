@@ -131,6 +131,7 @@ function getCartFromDB(updateCart,games) {
     .then(cart => {
       const lst = []
       for (var i = 0; i < games.length; i++){
+        // eslint-disable-next-line 
         const temp = games.find(k => k.id === cart[i].itemId);
         lst.push(temp);
       }
