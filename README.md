@@ -10,6 +10,10 @@ In this assignment, we implement a Game Shop website with a simple checkout cart
 - Qi Zhu
 
 
+## Production website
+
+http://csc301a1.s3-website.ca-central-1.amazonaws.com/
+
 
 
 ## Table of Contents
@@ -46,12 +50,6 @@ In this assignment, we implement a Game Shop website with a simple checkout cart
 
 <div style="page-break-after: always;"></div>
 
-
-
-
-## Production website
-
-http://csc301a1.s3-website.ca-central-1.amazonaws.com/
 
 
 
