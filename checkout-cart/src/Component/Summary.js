@@ -121,9 +121,9 @@ export default function Summary(props) {
   }
 
   return (
-    <div className="games" style={{marginLeft:"0.2rem"}} >
+    <div className="order" style={{marginLeft:"0.2rem"}} >
       <h1 className="title">Order Summary</h1>
-      <div>
+      <div style={{textAlign:"center"}}>
         {item.length === 0 &&
           <img alt="Empty cart" className="empty" src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
       </div>

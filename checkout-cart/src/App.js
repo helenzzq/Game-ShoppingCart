@@ -110,11 +110,9 @@ function generateDBCartItem(game, num) {
 
 function App() {
   // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  // const [dbItem, cartUpdation] = useState([]);
   const [games, setGame] = useState([]);
   const [item, updateCart] = useState([]);
-
-
+  
   const SampleComponent = () => {
     useEffect(() => {
       getAllItemsFromDB()
@@ -168,8 +166,9 @@ function App() {
             ))}
           </div>
         </div>
-        <Summary updateCart={updateCart} item={item} addItem={addItem} updateDB={updateCartToDB}></Summary>
+        
       </div>
+      <Summary updateCart={updateCart} item={item} addItem={addItem} updateDB={updateCartToDB}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
       </div>

@@ -87,6 +87,15 @@ border-radius: 0.6rem;
 padding: 1rem;
 flex:2;
 }
+.order{
+background-color: #e0e0e0;
+margin-top: 30px;
+position: relative;
+border-radius: 0.6rem;
+padding: 1rem;
+
+}
+
 .text-right {
 text-align: right;
 }
@@ -135,7 +144,6 @@ width: 1.5rem;
 font-weight: bold;
 }
 .empty{
-  margin-left: "67px";
   scale: 0.5;
 }
 
