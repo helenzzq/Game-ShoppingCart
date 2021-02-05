@@ -94,14 +94,14 @@ export default function Summary(props) {
             <div style={{ textAlign: "right" }}>
               <p className="boldtext" style={{ display: this.state.showMsg }}>Coupon Applied: 10% Off !</p>
               <h2 className="boldtext">Total:${this.state.total.toFixed(2)}</h2></div>
-            <hr />
             <div>
-            <img src={cart} alt="cart" className="ups" style={{display:'none'}}></img></div>
-            <div className="entry">
-              <button className="hoverBtn" onClick={() => this.displayDiscount()}>
+            <hr />
+              <div className="entry" style={{
+                float:"right",position:"relative"}}>
+              <button className="hoverBtn" style={{ padding:"10px" }}onClick={() => this.displayDiscount()}>
                 Proceed to Checkout
             </button>
-
+            <img src={cart} alt="cart" className="ups" style={{display:'none'}}></img></div>
             </div>
 
           </>
