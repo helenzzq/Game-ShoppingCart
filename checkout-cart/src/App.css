@@ -41,17 +41,20 @@ margin: 0.7rem;
 }
 
 
-.col-1 {
-  flex: 1;
-}
 
+.boldtext{
+  font-weight: bold;
+  margin-top:20px;
+  font-size: large;
+}
 .block {
   
-  background-color: #fffefe;
+  background-color: #e4e1e1;
   margin: 0.7rem;
   border-radius: 0.6rem;
   padding: 1rem;
   margin-top:440px;
+  flex: 2;
 }
 li {
   list-style-type: none;
@@ -78,11 +81,11 @@ nav {
 
 }
 .games{
-  background-color: #ffffff;
+  background-color: #e0e0e0;
   margin-top: 425px;
   border-radius: 0.6rem;
   padding: 1rem;
-  flex:1;
+  flex:2;
 }
 .text-right {
   text-align: right;

@@ -1,3 +1,4 @@
+
 import React from 'react';
 // import componentDidMount from '../App'
 export default function Summary(props) {
@@ -8,8 +9,8 @@ export default function Summary(props) {
     const { tag, tagName } = props;
     return (
       <div className="entry">
-        <div style={{ flex: 2 }}>{tag}</div>
-        <div style={{textAlign: 'right',flex:2}}>${tagName.toFixed(2)}</div>
+        <div style={{flex: 2 }}>{tag}</div>
+        <div style={{textAlign: 'right',flex:1}}>${tagName.toFixed(2)}</div>
       </div>
     );
   }
@@ -29,43 +30,99 @@ export default function Summary(props) {
       // componentDidUpdate(gameItem.id, itemInCart.num);
     }
   };
+
+  class DiscountForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { discountcode: '',total:0};
+    }
     
+    submitListener = (event) => {
+      event.preventDefault();
+      if (this.state.discountcode !== 'csc301') {
+        alert("The coupon is invalid!");
+      }
+      else {
+        alert("The coupon is valid! You received 10% off on your purchase!");
+        const subtotal = 0.1 * this.state.total;
+        this.setState({ total: subtotal, appliedCoupon:true }) 
+      }
+
+    }
+    handleChangeListener = (event) => {
+      this.setState({discountcode: event.target.value});
+    }
+    render() {
+    const subtotal = item.reduce((a, c) => a + c.price * c.num, 0);
+    const tax = subtotal * 0.13;
+    const shipping = 0;
+
+      if (this.state.total === 0) {
+        const tempTotal = subtotal + tax + shipping;
+        if (this.state.appliedCoupon === true){
+          const totals = tempTotal * 0.9;
+          this.setState({ total: totals });
+        }
+        else {
+          this.setState({ total: tempTotal });
+          
+        }
+
+      }
+    
+      return (
+        item.length !== 0 && (
+          <>
+            <hr></hr>
+            <PriceTag tag="Tax" tagName={tax} ></PriceTag>
+            <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
+            <PriceTag tag="Subtotal" tagName={subtotal} ></PriceTag>
+            <hr />
+        <div  id="form">
+        <form  onSubmit={this.submitListener}>
+              Discount Code: 
+        <input
+          type='text'
+          onChange={this.handleChangeListener}/>
+          <input type='submit' value="submit" />
+        </form>
+            </div>
+            <div style={{ textAlign: "right" }}>
+        <h2 className="boldtext">Total:${this.state.total.toFixed(2)}</h2></div>
+
+            <hr />
+            <div className="entry">
+              <button className="hoverBtn" onClick={() => displayDiscount()}>
+                Proceed to Checkout
+            </button>
+            </div>
+          </>)
+      );
+    }
+  }
+
+  function displayDiscount() {
+    document.getElementById("form").style.display("block");
+  }
+
   const removeAll = (gameItem) => {
     updateCart(item.filter((x) => x.id !== gameItem.id));
     //componentDidUpdate(gameItem.id,0)
   }
   function DisplaySummary() {
-
-    const subtotal = item.reduce((a, c) => a + c.price * c.num, 0);
-    const tax = subtotal * 0.13;
-    const shipping = 0;
-    const total = subtotal + tax + shipping;
     return (
       item.length !== 0 && (
-        <>
-          <hr></hr>
-          <PriceTag tag="Subtotal" tagName={subtotal} ></PriceTag>
-          <PriceTag tag="Tax" tagName={tax} ></PriceTag>
-          <PriceTag tag="Shipping" tagName={shipping} ></PriceTag>
-          <PriceTag tag="Total" tagName={total} ></PriceTag>
-          <hr />
-          <div className="entry">
-            <button className="hoverBtn" onClick={() => alert('Jump To CheckOut Page !')}>
-              Checkout
-          </button>
-          </div>
-        </>
+          <DiscountForm  ></DiscountForm>
       )
     );
-    
   }
 
   return (
-    <aside className="block" style={{flex:1}}>
+    <aside className="block" >
             <h1 className="title">Order Summary</h1>
             <div>
                 {item.length === 0 &&
-                    <img alt="Empty cart" style={{marginLeft : "67px"}} src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
+                    <img alt="Empty cart" style={{scale:0.5, marginLeft : "67px"}} src='https://mymeatfactory.com/assets/fe/img/empty-cart.png'></img>}
                 </div>
                 {item.map((item)=>{
                     return (
