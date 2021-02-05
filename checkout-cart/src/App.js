@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
@@ -123,7 +123,7 @@ function getAllItemsFromDB() {
 
 
 function App() {
-  const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
+  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
   // updateCartToDB(testItems);
   getAllItemsFromDB();
   getCartFromDB();
