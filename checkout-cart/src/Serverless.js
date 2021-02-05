@@ -1,10 +1,8 @@
 import { nanoid } from 'nanoid';
 
-var lsKeyForCartId = 'csc301-a1-cartId';
-
-function generateID() {
-  return nanoid(8);
-}
+var LOCAL_STORAGE_KEY_FOR_CARTID = 'csc301-a1-cartId';
+var CARTS_URL = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+var ITEMS_URL = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
 
 /**
  * Return cart from db, an array of items and count,
@@ -19,14 +17,14 @@ function generateID() {
 function getCartFromDB() {
     // Get current cart id
     let cartId;
-    cartId = localStorage.getItem(lsKeyForCartId);
+    cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
     if (!cartId) {
       cartId = generateID();
-      localStorage.setItem(lsKeyForCartId, cartId)
+      localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
     }
     console.log("cartId", cartId);
 
-    const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts?cartId=' + cartId;
+    const url = CARTS_URL + '?cartId=' + cartId;
     fetch(url, {
       mode: "cors",
       method: 'GET',
@@ -51,13 +49,12 @@ function getCartFromDB() {
 function updateCartToDB(items) {
       // Get current cart id
       let cartId;
-      cartId = localStorage.getItem(lsKeyForCartId);
+      cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
       if (!cartId) {
         cartId = generateID();
-        localStorage.setItem(lsKeyForCartId, cartId)
+        localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
       }
-      console.log("cartId", cartId);
-      const url = 'https://szae6kjook.execute-api.ca-central-1.amazonaws.com/default/carts';
+      const url = CARTS_URL;
       fetch(url, {
         mode: "cors",
         method: 'PUT',
@@ -87,7 +84,7 @@ function updateCartToDB(items) {
  * ]
  */
 function getAllItemsFromDB() {
-    const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
+    const url = ITEMS_URL;
     fetch(url, {
       mode: "cors",
       method: 'GET',
@@ -103,6 +100,11 @@ function getAllItemsFromDB() {
       console.log("getAllItemErr", err);
     });
 }
+
+function generateID() {
+    return nanoid(8);
+  }
+  
 
 
 export {generateID, getCartFromDB, updateCartToDB, getAllItemsFromDB};
