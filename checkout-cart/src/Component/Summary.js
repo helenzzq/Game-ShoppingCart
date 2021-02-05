@@ -40,19 +40,12 @@ export default function Summary(props) {
     }
     displayDiscount = () => {
       if (this.state.appliedCoupon === "none") {
-
         if (this.state.showMsg === "none") {
           this.setState({ appliedCoupon: "block" });
 
         }
-
-        else {
-
-
-        }
       }
     }
-
     submitListener = (event) => {
       event.preventDefault();
       if (this.state.discountcode !== 'csc301') {

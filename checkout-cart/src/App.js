@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import GameList from './GameList'
@@ -43,7 +43,7 @@ function getCartFromDB() {
       return res.json();
     })
     .then(cart => {
-      // TODO: Put data into games
+      <App ></App>
       console.log("cart", cart);
     })
     .catch(err => {
@@ -101,7 +101,24 @@ function updateCartToDB(items) {
  *  }
  * ]
  */
-function getAllItemsFromDB() {
+
+
+
+function App() {
+  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
+  // updateCartToDB(testItems);
+  const [games, setGame] = useState([]);
+  const [item, updateCart] = useState([]);
+
+  const SampleComponent = () => {
+    useEffect(() => {
+      getAllItemsFromDB()
+    }, [])
+  return (<div>foo</div>)
+  }
+  SampleComponent()
+  // getCartFromDB();
+  function getAllItemsFromDB() {
     const url = 'https://cbx468lra3.execute-api.ca-central-1.amazonaws.com/default/items';
     fetch(url, {
       mode: "cors",
@@ -110,8 +127,9 @@ function getAllItemsFromDB() {
     .then(res => {
       return res.json();
     })
-    .then(items => {
-      // TODO: Put data into games
+      .then(items => {
+        setGame(items);
+        console.log(games)
       console.log("items", items);
     })
     .catch(err => {
@@ -119,16 +137,7 @@ function getAllItemsFromDB() {
     });
 }
 
-
-
-function App() {
-  // const testItems = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}];
-  // updateCartToDB(testItems);
-  getAllItemsFromDB();
-  getCartFromDB();
-
-  const { games } = GameList;
-  const [item, updateCart] = useState([]);
+  // const { games } = GameList;
 
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
@@ -143,6 +152,7 @@ function App() {
   }
 
   return (
+    
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
 
       <div><Banner></Banner></div>
