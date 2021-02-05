@@ -22,21 +22,22 @@ exports.handler = async (event, context) => {
 
     try {
         switch (event.httpMethod) {
-            // case 'DELETE':
-            //     body = await dynamo.delete(JSON.parse(event.body)).promise();
-            //     break;
+
             case 'GET':
-                const data = await dynamo.get({ 
-                    TableName: cartsTable,
-                    Key: {
-                        id: event.queryStringParameters.cartId
-                    }
-                }).promise();
-                body = data.Item.items;
+                let data;
+                try {
+                    data= await dynamo.get({ 
+                        TableName: cartsTable,
+                        Key: {
+                            id: event.queryStringParameters.cartId
+                        },
+                    }).promise();
+                    body = data.Item.items;
+                } catch(err) {
+                    body = [];
+                }
                 break;
-            // case 'POST':
-            //     body = await dynamo.put(JSON.parse(event.body)).promise();
-            //     break;
+
             case 'PUT':
                 // body = await dynamo.update(JSON.parse(event.body)).promise();
                 const {cartId, items} = JSON.parse(event.body);
