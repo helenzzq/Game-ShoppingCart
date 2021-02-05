@@ -140,6 +140,17 @@ width: 1.5rem;
 .removeAll {
   margin-left:10px;
 }
+.up {
+  display: none;
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.pop {
+  background-color: white;
+  position: absolute;
+}
 .total{
 font-weight: bold;
 }
