@@ -136,9 +136,6 @@ function App() {
       console.log("getAllItemErr", err);
     });
 }
-
-  // const { games } = GameList;
-
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
     if (itemInCart) {
@@ -152,9 +149,7 @@ function App() {
   }
 
   return (
-    
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
-
       <div><Banner></Banner></div>
       <div className="container">
         <div className="games">
