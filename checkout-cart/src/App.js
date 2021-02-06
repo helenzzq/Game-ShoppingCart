@@ -180,17 +180,19 @@ function App() {
     const itemInCart = item.find((x) => x.id === gameItem.id);
     if (itemInCart.num === 1) {
       removeAll(gameItem)
+      updateCartToDB(dbItem)
     } else {
       updateCart(
         item.map((x) =>
           x.id === gameItem.id ? { ...itemInCart, num: itemInCart.num - 1 } : x
         )
       );
-      removeAll(gameItem);
+      const s = dbItem.find(k => k.id === gameItem.id);
+      dbItem.splice(dbItem.indexOf(s), 1);
       dbItem.push({ count: itemInCart.num - 1, itemId: itemInCart.id });
-
+      updateCartToDB(dbItem)
     }
-    updateCartToDB(dbItem)
+    
   };
 
   const removeAll = (gameItem) => {
