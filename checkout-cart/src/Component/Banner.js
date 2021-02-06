@@ -1,7 +1,7 @@
 import React from 'react';
 import banner from '../photo/banner.jpg';
 import join from '../photo/join.jpg';
-import { HomeOutlined ,PhoneOutlined } from '@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
 
 export default function Banner(props) {
 
