@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import Game from './Component/Game';
+import GameList from './GameList';
 import Summary from './Component/Summary'
 import Banner from './Component/Banner'
 import background from './photo/background.jpg'
@@ -31,6 +32,22 @@ function generateID() {
  * Example
     items = [{count:2, itemId: "_PI0GfYp"},{count: 3, itemId:"5U76ImCT"}]
  */
+function getAllItemsFromDB(setGame) {
+  const url = ITEMS_URL;
+  fetch(url, {
+    mode: "cors",
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(items => {
+      setGame(items);
+    })
+    .catch(err => {
+      console.log("getAllItemErr", err);
+    });
+}
 function updateCartToDB(items) {
   // Get current cart id
   let cartId;
@@ -39,8 +56,8 @@ function updateCartToDB(items) {
     cartId = generateID();
     localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
   }
-  console.log("cartId", cartId);
-  console.log(items)
+  // console.log("cartId", cartId);
+  // console.log("updateTODB",items)
   const url = CARTS_URL;
   fetch(url, {
     mode: "cors",
@@ -57,7 +74,43 @@ function updateCartToDB(items) {
       console.log("updateCartToDB", err);
     });
 }
+  
+function getCartFromDB(updateCart) {
+  // Get current cart id
+  let cartId;
+  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
+  if (!cartId) {
+    cartId = generateID();
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
+  }
+  console.log("cartId", cartId);
+  const {games} = GameList
+  const url = CARTS_URL+'?cartId=' + cartId;
+  fetch(url, {
+    mode: "cors",
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(cart => {
+      const lst = [];
+      let i;
+      for (i = 0; i < cart.length; i++) {
+        // eslint-disable-next-line 
+        const temp = games.find(k => k.id === cart[i].itemId);
+        lst.push({ ...temp, num:cart[i].count });
+      }
 
+      console.log("cart", cart);
+      updateCart(lst)
+      
+    })
+    .catch(err => {
+      console.log("getCartFromDB", err);
+    });
+
+}
 
 
 
@@ -69,32 +122,14 @@ function App() {
   
   const SampleComponent = () => {
     useEffect(() => {
-      getAllItemsFromDB()
-      getCartFromDB(updateCart,games)
-      console.log(games)
+      getAllItemsFromDB(setGame)
+      getCartFromDB(updateCart)
+
     }, [])
     return (<div></div>)
   }
   SampleComponent()
-  console.log(games)
-  function getAllItemsFromDB() {
-    
-    const url = ITEMS_URL;
-    fetch(url, {
-      mode: "cors",
-      method: 'GET',
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(items => {
-        setGame(items);
-        console.log("items", items);
-      })
-      .catch(err => {
-        console.log("getAllItemErr", err);
-      });
-  }
+
 
   /**
  * Return array of items from database,
@@ -109,58 +144,32 @@ function App() {
  * ]
  */
 
-  
-function getCartFromDB(updateCart,games) {
-  // Get current cart id
-  let cartId;
-  cartId = localStorage.getItem(LOCAL_STORAGE_KEY_FOR_CARTID);
-  if (!cartId) {
-    cartId = generateID();
-    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_CARTID, cartId)
-  }
-  console.log("cartId", cartId);
 
-  const url = CARTS_URL+'?cartId=' + cartId;
-  fetch(url, {
-    mode: "cors",
-    method: 'GET',
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(cart => {
-    const lst = []
-    for (var i = 0; i < games.length; i++){
-      // eslint-disable-next-line 
-      const temp = games.find(k => k.id === cart[i].itemId);
-      lst.push(temp);
-    }
-    updateCart(lst)
-    console.log("cart", cart);
-  })
-  .catch(err => {
-    console.log("getCartFromDB", err);
-  });
-
-}
 
   const addItem = (gameItem) => {
     const itemInCart = item.find(k => k.id === gameItem.id);
+    console.log("dbItembefore",dbItem)
     if (itemInCart) {
+
       updateCart(item.map(x => x.id === gameItem.id ? {
         ...itemInCart, num: itemInCart.num + 1
       } : x)
       );
-      cartUpdation([...dbItem, {count: itemInCart.num + 1, itemId: itemInCart.id }])
+      console.log("item", itemInCart.id)
+      const s = dbItem.find(k => k.id === gameItem.id);
+      dbItem.splice(dbItem.indexOf(s), 1);
+      dbItem.push({ count: itemInCart.num + 1, itemId: itemInCart.id })
+      console.log("dbItem",dbItem)
       updateCartToDB(dbItem)
-      console.log(dbItem)
     }
     else {
       updateCart([...item, { ...gameItem, num: 1 }])
-      cartUpdation([...dbItem, { count: 1, itemId: gameItem.id }])
+      dbItem.push({ count: 1, itemId: gameItem.id })
+      cartUpdation(dbItem)
+      console.log("singleItem",dbItem)
       updateCartToDB(dbItem)
-
     }
+
   }
   const deleteItem = (gameItem) => {
     const itemInCart = item.find((x) => x.id === gameItem.id);
@@ -172,15 +181,20 @@ function getCartFromDB(updateCart,games) {
           x.id === gameItem.id ? { ...itemInCart, num: itemInCart.num - 1 } : x
         )
       );
-      cartUpdation([...dbItem, {count: itemInCart.num -1, itemId: itemInCart.id }])
-      updateCartToDB(dbItem)
+      removeAll(gameItem);
+      dbItem.push({ count: itemInCart.num - 1, itemId: itemInCart.id });
+
     }
+    updateCartToDB(dbItem)
   };
 
   const removeAll = (gameItem) => {
     updateCart(item.filter((x) => x.id !== gameItem.id));
-    cartUpdation([])
+    const s = dbItem.find(k => k.id === gameItem.id);
+    dbItem.splice(dbItem.indexOf(s), 1);
     updateCartToDB(dbItem)
+    // getCartFromDB(dbItem)
+
   }
   return (
     <div className="App" style={{ backgroundImage: `url(${background})`, }}>
@@ -195,10 +209,8 @@ function getCartFromDB(updateCart,games) {
             ))}
           </div>
         </div>
-        
       </div>
-
-      <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem}></Summary>
+      <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem} removeAll={removeAll}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
       </div>

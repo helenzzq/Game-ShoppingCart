@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {ShoppingCartOutlined} from '@ant-design/icons';
 export default function Game(game) {
 
   const { gameItem , addItem} = game;
@@ -10,7 +10,7 @@ export default function Game(game) {
       <h3>{gameItem.name}</h3>
       <div>${gameItem.price}</div>
       <div>
-        <button className="hoverBtn" onClick={() => addItem(gameItem)} >Add To Cart</button>
+        <button className="hoverBtn" onClick={() => addItem(gameItem)} ><ShoppingCartOutlined style={{marginRight:"5px"}}/>Add To Cart</button>
       </div>
     </div>
   );
