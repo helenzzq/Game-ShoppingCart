@@ -144,6 +144,11 @@ function App() {
  * ]
  */
 
+  function completeOrder() {
+    updateCart([])
+    cartUpdation([])
+    updateCartToDB([])
+  }
 
 
   const addItem = (gameItem) => {
@@ -210,7 +215,7 @@ function App() {
           </div>
         </div>
       </div>
-      <Summary updateCart={updateCart} item={item} addItem={addItem} deleteItem ={deleteItem} removeAll={removeAll}></Summary>
+      <Summary completeOrder={completeOrder} item={item} addItem={addItem} deleteItem ={deleteItem} removeAll={removeAll}></Summary>
       <div className="foot">About Us/Contact Us/Join Us/
       <br></br>2021 Gamer Galaxy. All Rights Reseved.
       </div>
