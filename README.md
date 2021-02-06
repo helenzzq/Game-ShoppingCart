@@ -19,34 +19,36 @@ http://csc301a1.s3-website.ca-central-1.amazonaws.com/
 ## Table of Contents
 
 - [Checkout Cart](#checkout-cart)
-  * [Author](#author)
-  * [Production website](#production-website)
-  * [Design and Architecture](#design-and-architecture)
-  * [Design and Comparisons](#design-and-comparisons)
-    + [Platform: Web](#platform--web)
-    + [Frontend](#frontend)
+  - [Author](#author)
+  - [Production website](#production-website)
+  - [Table of Contents](#table-of-contents)
+  - [Design and Architecture](#design-and-architecture)
+  - [Design and Comparisons](#design-and-comparisons)
+    - [Platform: Web](#platform-web)
+    - [Frontend](#frontend)
       - [Comparison with other frontend technology](#comparison-with-other-frontend-technology)
       - [Vue vs React](#vue-vs-react)
       - [Angular vs React](#angular-vs-react)
       - [Summary](#summary)
-    + [Backend:](#backend-)
-      - [Why Serverless](#why-serverless)
+    - [Backend:](#backend)
+      - [Comparison with other backend technology](#comparison-with-other-backend-technology)
       - [Why Lambda](#why-lambda)
-    + [Database](#database)
+      - [Why Serverless](#why-serverless)
+    - [Database](#database)
+      - [Comparison with other database](#comparison-with-other-database)
       - [Why DynamoDB](#why-dynamodb)
       - [Why Eventual Consistency](#why-eventual-consistency)
-    + [Website Deployment](#website-deployment)
-    + [CI/CD: GitHub Actions](#ci-cd--github-actions)
-      - [Comparison with other CI/CD tools](#comparison-with-other-ci-cd-tools)
+    - [Website Deployment](#website-deployment)
+    - [CI/CD: GitHub Actions](#cicd-github-actions)
+      - [Comparison with other CI/CD tools](#comparison-with-other-cicd-tools)
       - [CircleCI vs  GitHub Actions](#circleci-vs--github-actions)
       - [Jenkins vs GitHub Actions](#jenkins-vs-github-actions)
       - [Summary](#summary-1)
-  * [Summary](#summary-2)
-  * [Available Scripts](#available-scripts)
-    + [`npm start`](#-npm-start-)
-    + [`npm test`](#-npm-test-)
-    + [`npm run build`](#-npm-run-build-)
-    + [`npm run eject`](#-npm-run-eject-)
+  - [Available Scripts](#available-scripts)
+    - [`npm start`](#npm-start)
+    - [`npm test`](#npm-test)
+    - [`npm run build`](#npm-run-build)
+    - [`npm run eject`](#npm-run-eject)
 
 <div style="page-break-after: always;"></div>
 
@@ -89,7 +91,7 @@ Careful considerations are made before selecting our tech stack. In the followin
 ### Platform: Web
 In this assignment, we are given the choice between mobile and web application. We choose to develop a web application because of cross-platform and accessibility:
 
-- **cross-platform**: Without learning new cross-platform frameworks such as React Native, developing sole mobile application will restrict us to the OS environment.
+- **cross-platform**: Without learning new cross-platform frameworks such as React Native, dev eloping sole mobile application will restrict us to the OS environment.
 - **accessibility**: Web application can be accessed anywhere with internet, which do not require software installation and special device.
 
 
@@ -162,36 +164,72 @@ We'll mainly compare these three Frontend options : React,Vue and Angular.
 As the most popular frontend technology, React requires less learning effort and has better performance with the Virtual DOM. Compared the other two tools with similar features, React is more manageable and has better performance. Thus, we choose React as our Frontend technology.
 
 
-
 ### Backend:
 
 Our backend is serverless deployed on AWS Lambda.
 
+#### Comparison with other backend technology
+We'll mainly compare three backend techonology: AWS Lambda, Flask and Django
+- **Language supported**
+  - Both Django and flask are python web framework , AWS Lambda supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code. It allow us to write functions in any programming language, which is extremely convenient.
+- **Popularity**
+  -   According to the ranking,flask and Django are both one of the top3 popular backend framework for 2020.
+  ![Ranking of Top Web Framework](./images/backend.PNG)
+  - However, AWS is now one of the top cloud computing platform taking over 32.4% of the market share and according to the research, 50% of the AWS users is in use of AWS lambda.With an infrastructure footprint in AWS, AWS lambda are widely use across a variety of companies.
+  - **AWS vs Django:Ease of Setup and quality delivered**
+    - According to a online research comparing pros and cons of AWS and Django:
+    - AWS lamda is preferred with the ease of set up and quality of support. While Django wins with
+    administrative use.
+      ![django pros](./images/ss.PNG)
+    - ![aws vs django](./images/aws.PNG)
+  - **Pros and Cons of Django**
+    -   Django focuses on delivering business value of the product, which is favor by larger companies.
+    - It's built-in ORM(objeect relational mapping ) and template system is also a large advantage.
+    - Since we are only developing small projects, Django is quite of a advanced framework to us. Thus we don't use it.
+  - **Pros and cons of Flask**
+    - Flask features a lightweight and modular design.Though we need additional extensions to transform it to the web framework.
+    - It has extensive documentation and thorough unit testatbility in the application.
+    - Cons:Flask handle every requst in turn since it has singular source. Thus, it takes a lot of time when processing multiple request.
+#### Why Lambda
+We decided to use AWS Lambda for its scalability, maturity and ease of development. Lambda automatically scales to handle 1,000 concurrent executions per Region, a quota that can be increased if needed. Some well known competitors to AWS Lambda are Microsoft's Azure function and Google function. Azure function only supports *C#* , *F#*, and *Shell* scripting, while Google Function only supports *JavaScript* and is the most expensive one out of the three listed. The two counterpart to AWS Lambda are not as mature as AWS Lambda. AWS Lambda is the first commercial serverless platform offered by a large cloud vendor, and it is still the most widely used serverless platform. Furthermore, one of our team member has previous experience in using AWS Lambda.  Therefore Lambda is the best option for us.
 #### Why Serverless
-
 Major concern that lead to a serverless backend are scalability and cost efficiency. Our application is monolithic for which contains only a few interactions with database and can be easily made stateless. Once the backend becomes stateless, the serverless backend hosting platform can start as many copies of the function as needed. When the function receives a request while it's processing a previous request, another instance of the function could be launched to handle the increased load.
 
 Another consideration is on website deployment. Many website hosting platforms such as S3 and GitHub Pages only accepts static website hosting and would not execute any backend code other than serverless ones. If our backend is not serverless, then compute machines such as AWS EC2 must be rented to deploy our dynamic website. Comparing to serverless backend that is paid-per-use, rental of a compute machine could be much less cost-efficient. 
 
-#### Why Lambda
-
-We decided to use AWS Lambda for its scalability, maturity and ease of development. Lambda automatically scales to handle 1,000 concurrent executions per Region, a quota that can be increased if needed. Some well known competitors to AWS Lambda are Microsoft's Azure function and Google function. Azure function only supports *C#* , *F#*, and *Shell* scripting, while Google Function only supports *JavaScript* and is the most expensive one out of the three listed. The two counterpart to AWS Lambda are not as mature as AWS Lambda. AWS Lambda is the first commercial serverless platform offered by a large cloud vendor, and it is still the most widely used serverless platform. Furthermore, one of our team member has previous experience in using AWS Lambda.  Therefore Lambda is the best option for us.
-
-
-
 ### Database
 
 Our database is AWS DynamoDB running on eventual consistency.
+#### Comparison with other database
+We mainly compare three database in this section: MongoDb, DynamoDB,MySQL.
+
+- **Popularity**
+  - According to the stackover flow 2020 survey, mysql is ranked as the top one database tenology , while  mongoDB is at the 5th place. 
+  - While for DynamoDb, as it's one of the associated service in AWS, it's also popular around developers.
+- **Ease of Development**
+  - As an integrated AWS service, DynamoDb is easier to develop end to end solution.
+  - Compared to MongoDB which use JSON-like documents,DynamoDB uses tables,items and attributes. Thus DynamoDB is easier to develop for beginner that is new to database.
+![database rank](./images/database.PNG)
+- **MySQL Pros and cons**
+  - MySQl is considered an open-source database option and it's icnredibly inexpensive compared to the other two database.
+    - **Cons:Scaling**
+      - When dealing with large scale operations at a given time, MySQL has poorer performance
+- **MongoDB pros and cons**
+  - **Speed**
+    - MongoDb has quicker query performance, since it stores thee majority of the data in RAM.
+  - **Support more type**
+    - As both NoSQL database,  MongoDb supports more datatypes than DynamoDB, and has less restriction on size.
+  - **Not support Transaction**
+    - MongoDb does not support for trnasaction, it only support certain atomic operations.
+
+More detailed Comparison are listed in "Why DynamoDb".
 
 #### Why DynamoDB
-
 We choose DynamoDB on considerations toward scalability and fault tolerance. DynamoDB automatically spreads the data and traffic for tables over a sufficient number of servers to handle the throughput and storage requirements, while maintaining its consistency level and achieving fast performance. All of the data is stored on solid-state disks (SSDs) and is automatically replicated across at least two Availability Zones in an AWS Region, providing built-in high availability and data durability.
 
 #### Why Eventual Consistency
 
 Eventual consistency reduces read/write latency by sacrificing synchronization. It is possible that the data read are stale. However, since our application only read the cart and items at website launch, the synchronization sacrifice is acceptable. Therefore, for better latency, we choose eventual consistency.     
-
-
 
 ### Website Deployment
 
