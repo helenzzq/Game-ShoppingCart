@@ -1,0 +1,66 @@
+Report (40%)
+1. Frontend technology: (95/100)
+Very detailed comparison (with data and figure) between React vs. Vue and and React vs.Angular.
+Included at least 5 considerations for each comparison.
+
+2. Backend (web or mobile): (75/100)
+Very detailed comparisons between AWS Lambda, Flask and Django.
+Provided good justifications for decisions for the final chosen technology.
+Missing comparisons for testing infrastructures.
+
+3. CI/CD: (95/100)
+In terms of deployment, it gave some good comparisons in terms of availability and performance.
+
+Very detailed comparisons between CircleCI, GitHub Actions, and Jenkins.
+Included many different considerations and included extra figures/data to backup the claim.
+
+4. Database (bonus): (45/50)
+Very detailed comparisons between MongoDb, DynamoDB, and MySQL.
+Listed pros and cons of each alternative with regarding to the different considerations.
+
+Section total:      310/300
+Section percent:    40%/40% (maximum grade)
+
+-------------------------------------------------------
+
+Deployed Application (40%)
+1. The application is functional: (90/100)
+The web app is fully functional. 
+Implemented fixed amount for shipping charges as well and coupon code.
+
+2. The application’s UI is present and usable: (90/100)
+The UI doesn't have any visual defects.
+The UI included additional visual elements for the store front and items.
+
+3. Testing infrastructure implemented: (85/100)
+A couple of tests are implemented for the backend.
+
+4. Continuous Integration and Continuous Development setup (bonus): (35/70)
+CI/CD is setup and most of the runs were successful.
+
+5. Database Implementation(bonus): (35/50)
+Database implemented with DynamoDB.
+
+Section total: 335/300
+Section percent: 40%/40% (maximum grade)
+
+-------------------------------------------------------
+
+Testing Availability(20%)
+1. The application is deployed: (100/100)
+Continuous deployment is setup via GitHub Actions.
+
+2. Instructions for testing are provided: (75/100)
+Very good set of instructions are provided for local testing.
+The readme file is very well structured with a table of contents at the beginning and a summary at the end.
+Would be nice to include some instructions/list of features for the demo itself.
+
+
+Section total: 175/200
+Section percent: 17.5%/20%
+
+
+Total Score: 40% + 40% + 17.5% = 97.5%
+Final Mark: 15 * 97.5% = 14.63
+
+
