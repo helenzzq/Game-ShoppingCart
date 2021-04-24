@@ -1,18 +1,12 @@
 # Checkout Cart
 
-This is the code repository for CSC301 2021 Winter Assignment 1.
 
-In this assignment, we implement a Game Shop website with a simple checkout cart. 
+In this project, we implement a Game Shop website with a simple checkout cart. 
 
 ## Author
 
 - Jefferson Zhong
 - Helen Zhu
-
-
-## Production website
-
-http://csc301a1.s3-website.ca-central-1.amazonaws.com/
 
 
 
