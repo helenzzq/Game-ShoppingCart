@@ -7,7 +7,7 @@ In this assignment, we implement a Game Shop website with a simple checkout cart
 ## Author
 
 - Jefferson Zhong
-- Qi Zhu
+- Helen Zhu
 
 
 ## Production website
